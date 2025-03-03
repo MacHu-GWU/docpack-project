@@ -5,6 +5,12 @@ from docpack import api
 
 def test():
     _ = api
+    _ = api.cache
+    _ = api.find_matching_files
+    _ = api.GitHubFile
+    _ = api.GitHubPipeline
+    _ = api.ConfluencePage
+    _ = api.ConfluencePipeline
 
 
 if __name__ == "__main__":

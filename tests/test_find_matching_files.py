@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import typing as T
-from pathlib import Path
-
-import pytest
 from docpack.paths import dir_project_root
 from docpack.find_matching_files import (
     remove_dupes,

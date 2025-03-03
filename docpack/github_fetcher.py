@@ -14,9 +14,9 @@ The resulting exported files preserve both content and contextual information, m
 them suitable for knowledge extraction, documentation generation, and AI context building.
 """
 
+import typing as T
 import hashlib
 from pathlib import Path
-from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -177,11 +177,12 @@ class GitHubFile(BaseModel):
         :returns: The path to the created XML file
         """
         path_out = dir_out.joinpath(f"{self.breadcrumb_path}~{self.uri_hash}.xml")
+        content = self.to_xml()
         try:
-            path_out.write_text(self.to_xml())
+            path_out.write_text(content, encoding="utf-8")
         except FileNotFoundError as e:
             path_out.parent.mkdir(parents=True)
-            path_out.write_text(self.to_xml())
+            path_out.write_text(content, encoding="utf-8")
         return path_out
 
 
@@ -301,7 +302,7 @@ class GitHubPipeline(BaseModel):
     exclude: list[str] = Field()
     dir_out: Path = Field()
 
-    def model_post_init(self, __context: Any) -> None:
+    def model_post_init(self, __context: T.Any) -> None:
         self.domain = extract_domain(self.domain)
 
     def post_process_github_file(self, github_file: GitHubFile) -> GitHubFile:

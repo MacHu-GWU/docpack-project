@@ -124,7 +124,12 @@ class ConfluencePage(BaseModel):
         fname = self.breadcrumb_path[3:].replace("||", "~")
         basename = f"{fname}.xml"
         path_out = dir_out.joinpath(basename)
-        path_out.write_text(self.to_xml(), encoding="utf-8")
+        content = self.to_xml()
+        try:
+            path_out.write_text(content, encoding="utf-8")
+        except FileNotFoundError:
+            path_out.parent.mkdir(parents=True)
+            path_out.write_text(content, encoding="utf-8")
         return path_out
 
 
@@ -280,7 +285,7 @@ def load_or_build_page_hierarchy(
     """
     real_cache_key = (confluence.url, space_id, cache_key)
     # print(f"{real_cache_key = }")  # for debug only
-    if real_cache_key in cache:
+    if real_cache_key in cache:  # pragma: no cover
         print("Hit cache!")  # for debug only
         cache_value = cache[real_cache_key]
         data = json.loads(gzip.decompress(cache_value).decode("utf-8"))

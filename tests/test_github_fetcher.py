@@ -43,7 +43,7 @@ class TestGitHubPipeline:
     def test_fetch(self):
         shutil.rmtree(dir_tmp, ignore_errors=True)
         gh_pipeline = GitHubPipeline(
-            domain="github.com",
+            domain="https://github.com",
             account="MacHu-GWU",
             repo="dockpack-project",
             branch="main",
@@ -64,6 +64,7 @@ class TestGitHubPipeline:
             ],
             dir_out=dir_tmp,
         )
+        assert gh_pipeline.domain == "github.com"
         gh_pipeline.fetch()
 
 
