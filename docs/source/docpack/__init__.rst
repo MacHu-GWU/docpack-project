@@ -16,5 +16,4 @@ sub packages and modules
     constants <constants>
     find_matching_files <find_matching_files>
     github_fetcher <github_fetcher>
-    model <model>
     
