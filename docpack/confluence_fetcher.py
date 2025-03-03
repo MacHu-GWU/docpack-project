@@ -3,10 +3,13 @@
 import typing as T
 import json
 import gzip
+from pathlib import Path
 
 from pydantic import BaseModel, Field
 import pyatlassian.api as pyatlassian
+import atlas_doc_parser.api as atlas_doc_parser
 
+from .constants import TAB
 from .cache import cache
 
 
@@ -66,11 +69,63 @@ class ConfluencePage(BaseModel):
 
     @property
     def atlas_doc(self) -> dict[str, T.Any]:
-        return self.page_data["body"]["atlas_doc_format"]
+        return json.loads(self.page_data["body"]["atlas_doc_format"]["value"])
 
     @property
-    def webui_link(self) -> str:
-        return self.page_data["_links"]["webui"]
+    def webui_url(self) -> str:
+        webui_link = self.page_data["_links"]["webui"]
+        webui_url = f"{self.site_url}/wiki{webui_link}"
+        return webui_url
+
+    @property
+    def markdown(self) -> str:
+        node_doc = atlas_doc_parser.NodeDoc.from_dict(
+            dct=self.atlas_doc,
+            ignore_error=True,
+        )
+        md_content = node_doc.to_markdown(ignore_error=True)
+        lines = [
+            f"# {self.title}",
+            "",
+        ]
+        lines.extend(md_content.splitlines())
+        md_content = "\n".join(lines)
+        return md_content
+
+    def to_xml(self) -> str:
+        """
+        Serialize the file data to XML format.
+
+        This method generates an XML representation of the file including its GitHub
+        metadata and content, suitable for document storage or AI context input.
+        """
+        lines = list()
+        "https://easyscalecloud.atlassian.net/wiki/spaces/BD/pages/62128129/CHC+AI+Brain+Implementation+Proposal"
+        "/spaces/BD/pages/47251518/Case+Study+-+Transforming+Financial+Services+Building+an+Enterprise-Grade+AI+Infrastructure+for+Scalable+Innovation"
+        lines.append("<document>")
+        lines.append(f"{TAB}<source_type>Confluence Page</source_type>")
+        lines.append(f"{TAB}<confluence_url>{self.webui_url}</confluence_url>")
+        lines.append(f"{TAB}<title>{self.title}</path>")
+        # if self.description:
+        #     lines.append(f"{TAB}<description>")
+        #     lines.append(self.description)
+        #     lines.append(f"{TAB}</description>")
+        lines.append(f"{TAB}<markdown_content>")
+        lines.append(self.markdown)
+        lines.append(f"{TAB}</markdown_content>")
+        lines.append("</document>")
+
+        return "\n".join(lines)
+
+    def export_to_file(
+        self,
+        dir_out: Path,
+    ) -> Path:
+        fname = self.breadcrumb_path[3:].replace("||", "~")
+        basename = f"{fname}.xml"
+        path_out = dir_out.joinpath(basename)
+        path_out.write_text(self.to_xml(), encoding="utf-8")
+        return path_out
 
 
 def fetch_raw_pages_from_space(
@@ -106,19 +161,6 @@ def fetch_raw_pages_from_space(
             )
             confluence_page_list.append(confluence_page)
     return confluence_page_list
-
-
-# def get_all_pages_from_space(
-#     confluence: pyatlassian.confluence.Confluence,
-#     space_id: int,
-# ) -> list[LocalConfluencePage]:
-#     cache_key = (confluence.url, space_id)
-#     if cache_key in cache:
-#         return cache[cache_key]
-#     else:
-#         result = _get_all_pages_from_space(confluence=confluence, space_id=space_id)
-#         cache[cache_key] = result
-#         return result
 
 
 def enrich_pages_with_hierarchy_data(
@@ -239,7 +281,7 @@ def load_or_build_page_hierarchy(
     real_cache_key = (confluence.url, space_id, cache_key)
     # print(f"{real_cache_key = }")  # for debug only
     if real_cache_key in cache:
-        # print("Hit cache!")  # for debug only
+        print("Hit cache!")  # for debug only
         cache_value = cache[real_cache_key]
         data = json.loads(gzip.decompress(cache_value).decode("utf-8"))
         sorted_pages = [ConfluencePage(**page_data) for page_data in data]
@@ -433,3 +475,41 @@ def find_matching_pages(
         if flag:
             matched_pages.append(page)
     return matched_pages
+
+
+class ConfluencePipeline(BaseModel):
+    confluence: pyatlassian.confluence.Confluence = Field()
+    space_id: int = Field()
+    cache_key: str = Field()
+    include: T.List[str] = Field()
+    exclude: T.List[str] = Field()
+    dir_out: Path = Field()
+
+    def post_process_confluence_page(
+        self,
+        confluence_page: ConfluencePage,
+    ) -> ConfluencePage:
+        return confluence_page
+
+    def post_process_path_out(
+        self,
+        confluence_page: ConfluencePage,
+        path_out: Path,
+    ):
+        pass
+
+    def fetch(self):
+        sorted_pages = load_or_build_page_hierarchy(
+            confluence=self.confluence,
+            space_id=self.space_id,
+            cache_key=self.cache_key,
+        )
+        matched_pages = find_matching_pages(
+            sorted_pages=sorted_pages,
+            include=self.include,
+            exclude=self.exclude,
+        )
+        for page in matched_pages:
+            page = self.post_process_confluence_page(page)
+            path_out = page.export_to_file(dir_out=self.dir_out)
+            self.post_process_path_out(confluence_page=page, path_out=path_out)

@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 
+"""
+Provides utilities for finding files in a directory hierarchy using glob patterns.
+This module offers functions to efficiently filter files by include/exclude patterns,
+similar to .gitignore functionality. It supports recursive directory traversal,
+pattern matching, and duplicate handling, making it ideal for selectively processing
+files in complex directory structures while maintaining a clean filtering approach.
+"""
+
 import typing as T
 import itertools
 from pathlib import Path
@@ -63,9 +71,12 @@ def find_matching_files(
         include=include,
         exclude=exclude,
     )
+    # print(f"{include = }, {exclude = }")  # for debug only
+
     # find matching files
     st = set()
     for path in itertools.chain(*[dir_root.glob(expr) for expr in include]):
+        # print(f"{path = !s}")
         if path in st:
             continue
         st.add(path)

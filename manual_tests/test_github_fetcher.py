@@ -1,24 +1,22 @@
 # -*- coding: utf-8 -*-
 
-import shutil
-from pathlib import Path
+"""
+Ad-hoc test for the github_fetcher.py module.
+"""
 
+from rich import print as rprint
 from docpack.paths import dir_project_root, PACKAGE_NAME
-from docpack.github_fetcher import GitHubPipeline
+from docpack.github_fetcher import (
+    find_matching_github_files_from_cloned_folder,
+)
 
-dir_here = Path(__file__).absolute().parent
-dir_tmp = dir_here / "tmp"
-shutil.rmtree(dir_tmp, ignore_errors=True)
-dir_tmp.mkdir()
-
-gh_pipeline = GitHubPipeline(
+github_file_list = find_matching_github_files_from_cloned_folder(
     domain="github.com",
     account="MacHu-GWU",
-    repo=f"{PACKAGE_NAME}-project",
+    repo="dockpack-project",
     branch="main",
     dir_repo=dir_project_root,
     include=[
-        f"README.rst",
         f"{PACKAGE_NAME}/**/*.py",
         f"tests/**/*.py",
         f"docs/source/**/index.rst",
@@ -32,6 +30,8 @@ gh_pipeline = GitHubPipeline(
         f"tests/**/all.py",
         f"docs/source/index.rst",
     ],
-    dir_out=dir_tmp,
 )
-gh_pipeline.fetch()
+
+for github_file in github_file_list:
+    rprint(github_file)
+    # print(github_file.path, github_file.github_url)

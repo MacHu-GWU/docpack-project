@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 
+"""
+Ad-hoc test for the confluence_fetcher.py module.
+"""
+
+from rich import print as rprint
 from pyatlassian.tests.api_keys import esc_conf
 from docpack.confluence_fetcher import (
     load_or_build_page_hierarchy,
@@ -27,5 +32,5 @@ matched_pages = find_matching_pages(
 
 # for page in sorted_pages:
 for page in matched_pages:
-    # rprint(page)
-    print(page.breadcrumb_path)
+    rprint(page)
+    # print(page.breadcrumb_path)
