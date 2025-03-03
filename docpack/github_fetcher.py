@@ -16,11 +16,55 @@ them suitable for knowledge extraction, documentation generation, and AI context
 
 import hashlib
 from pathlib import Path
+from typing import Any
+
 from pydantic import BaseModel, Field
-from git_web_url.api import get_web_url
 
 from .constants import TAB
 from .find_matching_files import find_matching_files
+
+
+def extract_domain(url: str) -> str:
+    """
+    Extract the domain part from a URL.
+
+    This function takes a URL as input and returns just the domain name,
+    removing any protocol prefixes (http://, https://) and any paths or
+    parameters that might follow the domain.
+
+    :param url: A URL string (e.g., "https://github.com/abc-team/xyz-project")
+    :return: The domain part of the URL (e.g., "github.com")
+
+    Examples:
+        >>> extract_domain("https://github.com/abc-team/xyz-project")
+        'github.com'
+        >>> extract_domain("http://github.com")
+        'github.com'
+    """
+    # Remove protocol part (http:// or https://)
+    if "://" in url:
+        domain = url.split("://")[1]
+    else:
+        domain = url
+
+    # Remove any paths or parameters after the domain
+    domain = domain.split("/")[0]
+
+    return domain
+
+
+def get_github_url(
+    domain: str,
+    account: str,
+    repo: str,
+    branch: str,
+    path_parts: tuple[str, ...],
+) -> str:
+    """
+    Generate a GitHub URL for a file in a repository.
+    """
+    path = "/".join(path_parts)
+    return f"https://{domain}/{account}/{repo}/blob/{branch}/{path}"
 
 
 class GitHubFile(BaseModel):
@@ -48,7 +92,7 @@ class GitHubFile(BaseModel):
     repo: str = Field()
     branch: str = Field()
     github_url: str = Field()
-    path_parts: list[str] = Field()
+    path_parts: tuple[str, ...] = Field()
     title: str = Field()
     description: str = Field()
     content: str = Field()
@@ -196,21 +240,28 @@ def find_matching_github_files_from_cloned_folder(
         from git_web_url.api to generate the GitHub URL for each file based on
         its local path.
     """
+    domain = extract_domain(domain)
     github_file_list = list()
     for path in find_matching_files(
         dir_root=dir_repo,
         include=include,
         exclude=exclude,
     ):
-        github_url = get_web_url(path)
-        relpath = path.relative_to(dir_repo)
+        path_parts = path.relative_to(dir_repo).parts
+        github_url = get_github_url(
+            domain=domain,
+            account=account,
+            repo=repo,
+            branch=branch,
+            path_parts=path_parts,
+        )
         github_file = GitHubFile(
             domain=domain,
             account=account,
             repo=repo,
             branch=branch,
             github_url=github_url,
-            path_parts=relpath.parts,
+            path_parts=path_parts,
             title="",
             description="",
             content=path.read_text(encoding="utf-8"),
@@ -249,6 +300,9 @@ class GitHubPipeline(BaseModel):
     include: list[str] = Field()
     exclude: list[str] = Field()
     dir_out: Path = Field()
+
+    def model_post_init(self, __context: Any) -> None:
+        self.domain = extract_domain(self.domain)
 
     def post_process_github_file(self, github_file: GitHubFile) -> GitHubFile:
         return github_file

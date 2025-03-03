@@ -1,4 +1,2 @@
-Sample RestructuredText Document
+What is docpack
 ==============================================================================
-
-This is a sample rst document.

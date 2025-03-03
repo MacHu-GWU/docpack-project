@@ -18,10 +18,11 @@ gh_pipeline = GitHubPipeline(
     branch="main",
     dir_repo=dir_project_root,
     include=[
-        f"README.rst",
+        "README.rst",
         f"{PACKAGE_NAME}/**/*.py",
-        f"tests/**/*.py",
-        f"docs/source/**/index.rst",
+        "tests/**/*.py",
+        "docs/source/**/index.rst",
+        "docs/source/**/index.md",
     ],
     exclude=[
         f"{PACKAGE_NAME}/tests/**",
