@@ -1,0 +1,30 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/tests/test_api.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>tests/test_api.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+from docpack import api
+
+
+def test():
+    _ = api
+    _ = api.cache
+    _ = api.find_matching_files
+    _ = api.GitHubFile
+    _ = api.GitHubPipeline
+    _ = api.ConfluencePage
+    _ = api.ConfluencePipeline
+
+
+if __name__ == "__main__":
+    from docpack.tests import run_cov_test
+
+    run_cov_test(__file__, "docpack.api", preview=False)
+
+  </content>
+</document>

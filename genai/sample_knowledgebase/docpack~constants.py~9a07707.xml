@@ -1,0 +1,15 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/constants.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/constants.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+
+TAB = " " * 2
+
+  </content>
+</document>

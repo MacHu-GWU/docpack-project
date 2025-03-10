@@ -1,0 +1,15 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/_version.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/_version.py</path>
+  <content>
+__version__ = "0.1.1"
+
+if __name__ == "__main__":  # pragma: no cover
+    print(__version__)
+
+  </content>
+</document>
