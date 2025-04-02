@@ -1,0 +1,14 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docs/source/03-Confluence-Fetcher/index.rst</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docs/source/03-Confluence-Fetcher/index.rst</path>
+  <content>
+Confluence Page Fetching Tutorial
+==============================================================================
+See :class:`~docpack.confluence_fetcher.ConfluencePipeline`.
+
+  </content>
+</document>

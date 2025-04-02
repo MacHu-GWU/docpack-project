@@ -1,0 +1,2780 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s05_3_create_release.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s05_3_create_release.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.publish_to_github_release(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s03_1_run_unit_test.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s03_1_run_unit_test.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.run_unit_test(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/paths.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/paths.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+from pathlib import Path
+
+dir_here = Path(__file__).absolute().parent
+dir_package = dir_here
+PACKAGE_NAME = dir_here.name
+dir_home = Path.home()
+
+dir_project_root = dir_here.parent
+dir_tmp = dir_project_root / "tmp"
+
+# ------------------------------------------------------------------------------
+# Virtual Environment Related
+# ------------------------------------------------------------------------------
+dir_venv = dir_project_root / ".venv"
+dir_venv_bin = dir_venv / "bin"
+
+# virtualenv executable paths
+bin_pytest = dir_venv_bin / "pytest"
+
+# test related
+dir_htmlcov = dir_project_root / "htmlcov"
+path_cov_index_html = dir_htmlcov / "index.html"
+dir_unit_test = dir_project_root / "tests"
+
+# doc related
+dir_docs_source = dir_project_root / "docs" / "source"
+
+# ------------------------------------------------------------------------------
+# Application Related
+# ------------------------------------------------------------------------------
+dir_project_home = dir_home / PACKAGE_NAME
+dir_project_home.mkdir(parents=True, exist_ok=True)
+dir_cache = dir_project_home / ".cache"
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/tests/test_api.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>tests/test_api.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+from docpack import api
+
+
+def test():
+    _ = api
+    _ = api.cache
+    _ = api.find_matching_files
+    _ = api.GitHubFile
+    _ = api.GitHubPipeline
+    _ = api.ConfluencePage
+    _ = api.ConfluencePipeline
+
+
+if __name__ == "__main__":
+    from docpack.tests import run_cov_test
+
+    run_cov_test(__file__, "docpack.api", preview=False)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/codecov.yml</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>codecov.yml</path>
+  <content>
+codecov:
+  require_ci_to_pass: yes
+
+coverage:
+  precision: 2
+  round: down
+  range: "0...100"
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+comment:
+  layout: "reach,diff,flags,files,footer"
+  behavior: default
+  require_changes: no
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s01_2_venv_remove.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s01_2_venv_remove.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.remove_virtualenv(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s06_1_setup_codecov.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s06_1_setup_codecov.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.setup_codecov_io_upload_token_on_github(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/__init__.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/__init__.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+from ._version import __version__
+from ._version import __short_description__
+from ._version import __license__
+from ._version import __author__
+from ._version import __author_email__
+from ._version import __maintainer__
+from ._version import __maintainer_email__
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s04_2_view_doc.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s04_2_view_doc.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.view_doc(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/README.rst</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/README.rst</path>
+  <content>
+About the ``bin`` folder
+==============================================================================
+The ``bin`` folder (bin stands for binary) is a Linux convention that stores the executable scripts.
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s02_6_install_automation.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s02_6_install_automation.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.poetry_install_auto(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/tests/test_github_fetcher.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>tests/test_github_fetcher.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+import shutil
+from docpack.github_fetcher import (
+    extract_domain,
+    GitHubPipeline,
+)
+from docpack.paths import (
+    dir_project_root,
+    dir_tmp,
+    PACKAGE_NAME,
+)
+
+
+def test_extract_domain():
+    cases = [
+        (
+            "https://github.com/abc-team/xyz-project",
+            "github.com",
+        ),
+        (
+            "https://github.com/",
+            "github.com",
+        ),
+        (
+            "https://github.com",
+            "github.com",
+        ),
+        (
+            "http://github.com/",
+            "github.com",
+        ),
+        (
+            "http://github.com",
+            "github.com",
+        ),
+    ]
+    for url, expected_domain in cases:
+        assert extract_domain(url) == expected_domain
+
+
+class TestGitHubPipeline:
+    def test_fetch(self):
+        shutil.rmtree(dir_tmp, ignore_errors=True)
+        gh_pipeline = GitHubPipeline(
+            domain="https://github.com",
+            account="MacHu-GWU",
+            repo="dockpack-project",
+            branch="main",
+            dir_repo=dir_project_root,
+            include=[
+                f"{PACKAGE_NAME}/**/*.py",
+                f"tests/**/*.py",
+                f"docs/source/**/index.rst",
+            ],
+            exclude=[
+                f"{PACKAGE_NAME}/tests/**",
+                f"{PACKAGE_NAME}/tests/**/*.*",
+                f"{PACKAGE_NAME}/vendor/**",
+                f"{PACKAGE_NAME}/vendor/**/*.*",
+                f"tests/all.py",
+                f"tests/**/all.py",
+                f"docs/source/index.rst",
+            ],
+            dir_out=dir_tmp,
+        )
+        assert gh_pipeline.domain == "github.com"
+        gh_pipeline.fetch()
+
+
+if __name__ == "__main__":
+    from docpack.tests import run_cov_test
+
+    run_cov_test(__file__, "docpack.github_fetcher", preview=False)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/github_fetcher.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/github_fetcher.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+"""
+GitHub file extraction and synchronization utilities for documentation packaging.
+
+This module provides tools for retrieving, processing, and exporting files from GitHub
+repositories, with a focus on preparing content for AI knowledge bases and documentation
+systems. It includes capabilities for file filtering with glob patterns, metadata
+enrichment, XML serialization, and structured export. The module's core components are
+the :class:`GitHubFile` class, which represents individual repository files with their content
+and metadata, and the :class:`GitHubPipeline` class, which orchestrates the entire process of
+extracting files matching specific criteria and exporting them to a target location.
+The resulting exported files preserve both content and contextual information, making
+them suitable for knowledge extraction, documentation generation, and AI context building.
+"""
+
+import typing as T
+import hashlib
+from pathlib import Path
+from functools import cached_property
+
+from pydantic import BaseModel, Field
+
+from .constants import TAB
+from .find_matching_files import find_matching_files
+
+
+def extract_domain(url: str) -> str:
+    """
+    Extract the domain part from a URL.
+
+    This function takes a URL as input and returns just the domain name,
+    removing any protocol prefixes (http://, https://) and any paths or
+    parameters that might follow the domain.
+
+    :param url: A URL string (e.g., "https://github.com/abc-team/xyz-project")
+    :return: The domain part of the URL (e.g., "github.com")
+
+    Examples:
+        >>> extract_domain("https://github.com/abc-team/xyz-project")
+        'github.com'
+        >>> extract_domain("http://github.com")
+        'github.com'
+    """
+    # Remove protocol part (http:// or https://)
+    if "://" in url:
+        domain = url.split("://")[1]
+    else:
+        domain = url
+
+    # Remove any paths or parameters after the domain
+    domain = domain.split("/")[0]
+
+    return domain
+
+
+def get_github_url(
+    domain: str,
+    account: str,
+    repo: str,
+    branch: str,
+    path_parts: tuple[str, ...],
+) -> str:
+    """
+    Generate a GitHub URL for a file in a repository.
+    """
+    path = "/".join(path_parts)
+    return f"https://{domain}/{account}/{repo}/blob/{branch}/{path}"
+
+
+class GitHubFile(BaseModel):
+    """
+    A data container representing a file in a GitHub repository with metadata and content.
+
+    This class provides utilities for working with GitHub files, including methods for
+    serializing to LLM friendly XML format, generating unique identifiers based on
+    the file path, and exporting the file data to disk.
+
+    :param domain: The domain name of the GitHub instance (e.g., 'github.com')
+    :param account: The GitHub account or organization name
+    :param repo: The name of the GitHub repository
+    :param branch: The branch name (e.g., 'main', 'master') or tag name.
+    :param github_url: The full URL to the file on GitHub, this is usually
+        a calculated value.
+    :param path_parts: The file path broken into components
+    :param title: An optional title for the file
+    :param description: An optional description of the file
+    :param content: The raw content of the file
+    """
+
+    domain: str = Field()
+    account: str = Field()
+    repo: str = Field()
+    branch: str = Field()
+    github_url: str = Field()
+    path_parts: tuple[str, ...] = Field()
+    title: str = Field()
+    description: str = Field()
+    content: str = Field()
+
+    @property
+    def path(self) -> str:
+        """
+        Get the relative path of the file from the repository root.
+
+        :returns: The path as a string with components joined by '/'
+        """
+        return "/".join(self.path_parts)
+
+    def to_xml(self) -> str:
+        """
+        Serialize the file data to XML format.
+
+        This method generates an XML representation of the file including its GitHub
+        metadata and content, suitable for document storage or AI context input.
+        """
+        lines = list()
+
+        lines.append("<document>")
+        lines.append(f"{TAB}<source_type>GitHub Repository</source_type>")
+        lines.append(f"{TAB}<github_url>{self.github_url}</github_url>")
+        lines.append(f"{TAB}<account>{self.account}</account>")
+        lines.append(f"{TAB}<repo>{self.repo}</repo>")
+        lines.append(f"{TAB}<branch>{self.branch}</branch>")
+        lines.append(f"{TAB}<path>{self.path}</path>")
+        if self.title:
+            lines.append(f"{TAB}<title>{self.title}</path>")
+        if self.description:
+            lines.append(f"{TAB}<description>")
+            lines.append(self.description)
+            lines.append(f"{TAB}</description>")
+        lines.append(f"{TAB}<content>")
+        lines.append(self.content)
+        lines.append(f"{TAB}</content>")
+        lines.append("</document>")
+
+        return "\n".join(lines)
+
+    @property
+    def uri_hash(self) -> str:
+        """
+        Generate a short hash identifier for the file.
+
+        Creates a unique identifier based on the file's GitHub location including
+        domain, account, repo, branch, and path. This hash can be used for
+        creating unique filenames or identifiers.
+
+        :returns: A 7-character hash string derived from the file's URI
+        """
+        hash_key = f"{self.domain}/{self.account}/{self.repo}/{self.branch}/{self.path}"
+        return hashlib.sha256(hash_key.encode("utf-8")).hexdigest()[:7]
+
+    @property
+    def breadcrumb_path(self) -> str:
+        """
+        Create a flattened representation of the file path.
+
+        Converts the hierarchical path structure into a single string with
+        path components joined by '~' characters. This format is useful for
+        creating filesystem-safe filenames that preserve path information.
+
+        :returns: The path with components joined by '~' instead of '/'
+        """
+        return "~".join(self.path_parts)
+
+    def export_to_file(
+        self,
+        dir_out: Path,
+    ) -> Path:
+        """
+        Export the file data as an XML document to the specified directory.
+
+        Creates an XML file in the specified directory with a filename that
+        combines the breadcrumb path and URI hash to ensure uniqueness.
+
+        :param dir_out: The directory where the XML file should be saved
+
+        :returns: The path to the created XML file
+        """
+        path_out = dir_out.joinpath(f"{self.breadcrumb_path}~{self.uri_hash}.xml")
+        content = self.to_xml()
+        try:
+            path_out.write_text(content, encoding="utf-8")
+        except FileNotFoundError as e:
+            path_out.parent.mkdir(parents=True)
+            path_out.write_text(content, encoding="utf-8")
+        return path_out
+
+
+def sort_github_files(
+    github_file_list: list[GitHubFile],
+) -> list[GitHubFile]:
+    """
+    Sort GitHub files by their relative path within the repository.
+
+    This function takes a list of :class:`GitHubFile` objects and returns a new list
+    sorted alphabetically by their path property. Sorting helps maintain
+    consistent ordering when processing or displaying files.
+
+    :param github_file_list: A list of :class:`GitHubFile` objects to sort
+
+    :returns: A new list containing the same :class:`GitHubFile` objects
+        but sorted by their paths
+    """
+    return list(sorted(github_file_list, key=lambda x: x.path))
+
+
+def find_matching_github_files_from_cloned_folder(
+    domain: str,
+    account: str,
+    repo: str,
+    branch: str,
+    dir_repo: Path,
+    include: list[str],
+    exclude: list[str],
+) -> list[GitHubFile]:
+    """
+    Find and process files from a local clone of a GitHub repository.
+
+    This function scans a local directory containing a Git repository clone,
+    matches files based on include/exclude patterns, and converts matching
+    files into GitHubFile objects with appropriate metadata. The function uses
+    the find_matching_files utility to apply pattern filtering.
+
+    :param domain: The domain of the GitHub instance (e.g., 'github.com')
+    :param account: The GitHub account or organization name
+    :param repo: The name of the GitHub repository
+    :param branch: The branch name (e.g., 'main', 'master') or tag name.
+    :param dir_repo: Path to the root of the cloned repository
+    :param include: List of glob patterns specifying which files to include
+            (e.g., ["*.py", "docs/**/*.md"])
+    :param exclude: List of glob patterns specifying which files to exclude
+            (e.g., ["**/__pycache__/**", "**/.git/**"])
+
+    :returns: A sorted list of :class:`GitHubFile` objects representing the
+        matching files from the repository
+
+    .. note::
+
+        This function uses
+        `get_web_url <https://github.com/MacHu-GWU/git_web_url-project>`_
+        from git_web_url.api to generate the GitHub URL for each file based on
+        its local path.
+    """
+    domain = extract_domain(domain)
+    github_file_list = list()
+    for path in find_matching_files(
+        dir_root=dir_repo,
+        include=include,
+        exclude=exclude,
+    ):
+        path_parts = path.relative_to(dir_repo).parts
+        github_url = get_github_url(
+            domain=domain,
+            account=account,
+            repo=repo,
+            branch=branch,
+            path_parts=path_parts,
+        )
+        github_file = GitHubFile(
+            domain=domain,
+            account=account,
+            repo=repo,
+            branch=branch,
+            github_url=github_url,
+            path_parts=path_parts,
+            title="",
+            description="",
+            content=path.read_text(encoding="utf-8"),
+        )
+        github_file_list.append(github_file)
+
+    return sort_github_files(github_file_list)
+
+
+class GitHubPipeline(BaseModel):
+    """
+    A data pipeline that extracts and synchronizes files from a GitHub repository to a target location.
+
+    GitHubPipeline provides an abstraction for defining a GitHub repository source and
+    a set of file filters, then synchronizing the matching files to a specified output directory.
+    This pipeline handles the entire workflow from selecting files to saving them as structured
+    XML documents that preserve both content and metadata.
+
+    :param domain: The domain of the GitHub instance (e.g., 'github.com')
+    :param account: The GitHub account or organization name
+    :param repo: The name of the GitHub repository
+    :param branch: The branch name (e.g., 'main', 'master') or tag name.
+    :param dir_repo: Path to the root of the cloned repository
+    :param include: List of glob patterns specifying which files to include
+            (e.g., ["*.py", "docs/**/*.md"])
+    :param exclude: List of glob patterns specifying which files to exclude
+            (e.g., ["**/__pycache__/**", "**/.git/**"])
+    :param dir_out: The directory where the XML files should be exported.
+    """
+
+    domain: str = Field()
+    account: str = Field()
+    repo: str = Field()
+    branch: str = Field()
+    dir_repo: Path = Field()
+    include: list[str] = Field()
+    exclude: list[str] = Field()
+    dir_out: Path = Field()
+
+    def model_post_init(self, __context: T.Any) -> None:
+        self.domain = extract_domain(self.domain)
+
+    def post_process_github_file(self, github_file: GitHubFile) -> GitHubFile:
+        return github_file
+
+    def post_process_path_out(self, github_file: GitHubFile, path_out: Path):
+        pass
+
+    def fetch(self):
+        """
+        Execute the pipeline to extract and export GitHub files to the target directory.
+
+        This method performs the complete workflow:
+
+        1. Finds all files in the local repository that match the include/exclude patterns
+        2. Converts each file to a GitHubFile object with metadata
+        3. Exports each file as an XML document to the specified output directory
+        """
+        github_file_list = find_matching_github_files_from_cloned_folder(
+            domain=self.domain,
+            account=self.account,
+            repo=self.repo,
+            branch=self.branch,
+            dir_repo=self.dir_repo,
+            include=self.include,
+            exclude=self.exclude,
+        )
+        for github_file in github_file_list:
+            github_file = self.post_process_github_file(github_file)
+            path_out = github_file.export_to_file(dir_out=self.dir_out)
+            self.post_process_path_out(github_file=github_file, path_out=path_out)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docs/source/01-What-is-docpack/index.rst</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docs/source/01-What-is-docpack/index.rst</path>
+  <content>
+What is docpack
+==============================================================================
+DocPack is a powerful Python utility that packages files from diverse source systems into a rich-context, single-file knowledge base. This consolidated format allows you to simply drag and drop documents into AI assistants, ask questions immediately, or seamlessly upload them to your AI knowledge base vector store for long-term reference and retrieval. DocPack transforms scattered documentation into an AI-ready resource that preserves critical context and structure.
+
+The library supports various data sources and provides a robust include/exclude syntax similar to .gitignore for precise document filtering. This pattern-matching capability gives you granular control over which documents to include in your knowledge base, allowing you to target specific file types, directories, or individual documents while excluding others. DocPack handles the complexity of crawling, filtering, and processing documents so you can focus on utilizing the information.
+
+DocPack enriches each document with comprehensive metadata including file paths, folder structures, document URLs, titles, and data source types. This contextual information enables AI systems to provide more accurate responses with proper source attribution, allowing you to verify information at its origin. Currently, DocPack supports both local file systems (via :class:`~docpack.github_fetcher.GitHubPipeline`) and Confluence pages (via :class:`~docpack.confluence_fetcher.ConfluencePipeline`), with each fetcher specialized in extracting and preserving the unique metadata of its source system.
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/tests/test_confluence_fetcher.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>tests/test_confluence_fetcher.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+import shutil
+from docpack.cache import cache
+from docpack.tests.confluence import confluence
+from docpack.confluence_fetcher import (
+    extract_id,
+    process_include_exclude,
+    ConfluencePipeline,
+)
+from docpack.paths import (
+    dir_project_root,
+    dir_tmp,
+    PACKAGE_NAME,
+)
+
+
+def test_extract_id():
+    cases = [
+        (
+            "https://example.atlassian.net/wiki/spaces/BD/pages/131084/Value+Proposition",
+            "131084",
+        ),
+        (
+            "https://example.atlassian.net/wiki/spaces/BD/pages/131084/Value+Proposition/*",
+            "131084",
+        ),
+        (
+            "https://example.atlassian.net/wiki/spaces/123/pages/131084/Value+Proposition",
+            "131084",
+        ),
+        (
+            "https://example.atlassian.net/wiki/spaces/123/pages/131084/Value+Proposition/*",
+            "131084",
+        ),
+        ("131084", "131084"),
+        ("131084/*", "131084"),
+    ]
+    for url, expected_id in cases:
+        assert extract_id(url) == expected_id
+
+
+def test_process_include_exclude():
+    cases = [
+        (
+            [],
+            [],
+            [],
+            [],
+        ),
+        (
+            [
+                "https://example.atlassian.net/wiki/spaces/BD/pages/111111/TitleA",
+                "https://example.atlassian.net/wiki/spaces/BD/pages/222222/TitleA/*",
+                "333333",
+                "444444/*",
+            ],
+            [],
+            [
+                "111111",
+                "222222/*",
+                "333333",
+                "444444/*",
+            ],
+            [],
+        ),
+    ]
+    for include, exclude, expected_include, expected_exclude in cases:
+        new_include, new_exclude = process_include_exclude(include, exclude)
+        assert new_include == expected_include
+        assert new_exclude == expected_exclude
+
+
+class TestConfluencePipeline:
+    def test_fetch(self):
+        space_id = 65697
+        cache_key = "2025-03-01"  # business development
+        shutil.rmtree(dir_tmp, ignore_errors=True)
+        real_cache_key = (confluence.url, space_id, cache_key)
+        cache.delete(real_cache_key)
+
+        confluence_pipeline = ConfluencePipeline(
+            confluence=confluence,
+            space_id=space_id,
+            cache_key=cache_key,
+            include=[
+                f"{confluence.url}/wiki/spaces/BD/pages/3178507/Products/*",
+                f"{confluence.url}/wiki/spaces/BD/pages/46792705/Services/*",
+            ],
+            exclude=[
+                f"{confluence.url}/wiki/spaces/BD/pages/3113056/Data+Pipeline+for+DynamoDB+-+Competitive+Analysis/*",
+                f"{confluence.url}/wiki/spaces/BD/pages/56197124/Service+Catalog",
+            ],
+            dir_out=dir_tmp,
+        )
+        confluence_pipeline.fetch()
+
+
+if __name__ == "__main__":
+    from docpack.tests import run_cov_test
+
+    run_cov_test(__file__, "docpack.confluence_fetcher", preview=False)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s02_1_install_only_root.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s02_1_install_only_root.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.poetry_install_only_root(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/api.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/api.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+from .cache import cache
+from .find_matching_files import find_matching_files
+from .github_fetcher import GitHubFile
+from .github_fetcher import GitHubPipeline
+from .confluence_fetcher import ConfluencePage
+from .confluence_fetcher import ConfluencePipeline
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/tests/test_find_matching_files.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>tests/test_find_matching_files.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+from docpack.paths import dir_project_root
+from docpack.find_matching_files import (
+    remove_dupes,
+    process_include_exclude,
+    find_matching_files,
+)
+
+
+def _test_remove_dupes(in_list: list, out_list: list):
+    assert remove_dupes(in_list) == out_list
+    assert id(in_list) != id(out_list)
+
+
+def test_remove_dupes():
+    cases = [
+        ([], []),
+        ([1, 2, 3], [1, 2, 3]),
+        ([1, 2, 2, 3, 1, 4], [1, 2, 3, 4]),
+        ([1, 1, 1, 1], [1]),
+        (["a", "b", "a", "c", "b", "d"], ["a", "b", "c", "d"]),
+        (["1", "2", "1", "3"], ["1", "2", "3"]),
+        (list(range(1000)) + list(range(500)), list(range(1000))),
+    ]
+    for in_list, out_list in cases:
+        _test_remove_dupes(in_list, out_list)
+
+
+def _test_process_include_exclude(
+    include: list[str],
+    exclude: list[str],
+    expected_include: list[str],
+    expected_exclude: list[str],
+):
+    result_include, result_exclude = process_include_exclude(include, exclude)
+    assert result_include == expected_include
+    assert result_exclude == expected_exclude
+
+
+def test_process_include_exclude():
+    cases = [
+        # Test default behavior with empty lists
+        ([], [], ["**/*.*"], []),
+        # Test with only include patterns
+        (["*.py", "*.txt"], [], ["*.py", "*.txt"], []),
+        # Test with only exclude patterns
+        (
+            [],
+            ["*.pyc", "__pycache__/**"],
+            ["**/*.*"],
+            ["*.pyc", "__pycache__/**"],
+        ),
+        # Test with both include and exclude patterns
+        (
+            ["*.py", "*.txt"],
+            ["test_*.py", "temp.txt"],
+            ["*.py", "*.txt"],
+            ["test_*.py", "temp.txt"],
+        ),
+        # Test deduplication of include patterns
+        (
+            ["*.py", "*.py", "*.txt", "*.txt"],
+            [],
+            ["*.py", "*.txt"],
+            [],
+        ),
+        # Test deduplication of exclude patterns
+        (
+            [],
+            ["*.pyc", "*.pyc", "__pycache__/**", "__pycache__/**"],
+            ["**/*.*"],
+            ["*.pyc", "__pycache__/**"],
+        ),
+        # Test deduplication of both patterns
+        (
+            ["*.py", "*.py", "*.txt"],
+            ["test_*.py", "test_*.py", "temp.txt"],
+            ["*.py", "*.txt"],
+            ["test_*.py", "temp.txt"],
+        ),
+        (
+            ["src/**/*.py", "tests/**/*.py"],
+            ["**/__pycache__/**", "**/*.pyc"],
+            ["src/**/*.py", "tests/**/*.py"],
+            ["**/__pycache__/**", "**/*.pyc"],
+        ),
+        (
+            ["*.PY", "*.py"],
+            ["*.Pyc", "*.pYc"],
+            ["*.PY", "*.py"],
+            ["*.Pyc", "*.pYc"],
+        ),
+        (
+            ["test-*.py", "test_?.txt"],
+            ["*[0-9].py", "*-temp.*"],
+            ["test-*.py", "test_?.txt"],
+            ["*[0-9].py", "*-temp.*"],
+        ),
+    ]
+    for include, exclude, expected_include, expected_exclude in cases:
+        _test_process_include_exclude(
+            include,
+            exclude,
+            expected_include,
+            expected_exclude,
+        )
+
+
+def test_find_matching_files_case_1():
+    res = find_matching_files(
+        dir_root=dir_project_root,
+        include=[
+            "docpack/**/*.py",
+            "tests/**/*.py",
+            "docs/source/*/**/index.rst",
+            "docs/source/*/**/*.py",
+            "README.rst",
+            "pyproject.toml",
+        ],
+        exclude=[
+            "docpack/docs/**/*.*",
+            "docpack/tests/**/*.*",
+            "docpack/vendor/**/*.*",
+            "tests/**/all.py",
+        ],
+    )
+    for path in res:
+        print(path.relative_to(dir_project_root))
+
+
+if __name__ == "__main__":
+    from docpack.tests import run_cov_test
+
+    run_cov_test(__file__, "docpack.find_matching_files", preview=False)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s02_4_install_test.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s02_4_install_test.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.poetry_install_test(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/docs/__init__.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/docs/__init__.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+doc_data = dict()
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s04_1_build_doc.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s04_1_build_doc.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.build_doc(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/.readthedocs.yml</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>.readthedocs.yml</path>
+  <content>
+# Ref: https://docs.readthedocs.io/en/stable/config-file/v2.html
+version: 2
+
+build:
+  os: ubuntu-20.04
+  tools:
+    python: "3.11"
+
+sphinx:
+  configuration: docs/source/conf.py
+
+python:
+  install:
+  - method: pip
+    path: .
+  - requirements: requirements.txt
+  - requirements: requirements-doc.txt
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/pywf.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/pywf.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+"""
+Initialize PyWf object from a ``pyproject.toml`` file.
+"""
+
+from pathlib import Path
+from pywf_open_source.api import PyWf
+
+dir_here = Path(__file__).absolute().parent
+path_pyproject_toml = dir_here.parent.joinpath("pyproject.toml")
+pywf = PyWf.from_pyproject_toml(path_pyproject_toml)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/confluence_fetcher.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/confluence_fetcher.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+"""
+Confluence page fetching and processing utilities.
+"""
+
+import typing as T
+import json
+import gzip
+from pathlib import Path
+
+from pydantic import BaseModel, Field
+import pyatlassian.api as pyatlassian
+import atlas_doc_parser.api as atlas_doc_parser
+
+from .constants import TAB
+from .cache import cache
+
+
+class ConfluencePage(BaseModel):
+    """
+    A data container for Confluence pages that enriches the API response data with
+    hierarchical metadata and navigation properties.
+
+    This class wraps the raw page data returned by Confluence's
+    `get pages <https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/#api-pages-get>`_ API
+    and adds additional attributes for working with page hierarchies and navigation.
+
+    :param page_data: The raw item response from the `Confluence.get_pages` API call
+    :param site_url: Base URL of the Confluence site
+    :param id_path: Hierarchical ID-based path (e.g., "/parent_id/child_id")
+        for filtering with glob patterns
+    :param position_path: Position-based path (e.g., "/1/3/2") used for hierarchical sorting
+    :param breadcrumb_path: Human-readable title hierarchy (e.g., "|| Parent || Child || Page")
+        similar to UI breadcrumbs
+
+    The class assumes the body format is
+    `Atlas Doc Format <https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/>`_
+
+    Properties like `id`, `title`, `parent_id` provide convenient access to commonly
+    used attributes from the raw page data.
+    """
+
+    page_data: dict[str, T.Any] = Field()
+    site_url: str = Field()
+    id_path: T.Optional[str] = Field()
+    position_path: T.Optional[str] = Field()
+    breadcrumb_path: T.Optional[str] = Field()
+
+    @property
+    def space_id(self) -> str:
+        return self.page_data["spaceId"]
+
+    @property
+    def id(self) -> str:
+        return self.page_data["id"]
+
+    @property
+    def parent_id(self) -> str:
+        return self.page_data["parentId"]
+
+    @property
+    def parent_type(self) -> str:
+        return self.page_data["parentType"]
+
+    @property
+    def title(self) -> str:
+        return self.page_data["title"]
+
+    @property
+    def position(self) -> int:
+        return self.page_data["position"]
+
+    @property
+    def atlas_doc(self) -> dict[str, T.Any]:
+        return json.loads(self.page_data["body"]["atlas_doc_format"]["value"])
+
+    @property
+    def webui_url(self) -> str:
+        webui_link = self.page_data["_links"]["webui"]
+        webui_url = f"{self.site_url}/wiki{webui_link}"
+        return webui_url
+
+    @property
+    def markdown(self) -> str:
+        node_doc = atlas_doc_parser.NodeDoc.from_dict(
+            dct=self.atlas_doc,
+            ignore_error=True,
+        )
+        md_content = node_doc.to_markdown(ignore_error=True)
+        lines = [
+            f"# {self.title}",
+            "",
+        ]
+        lines.extend(md_content.splitlines())
+        md_content = "\n".join(lines)
+        return md_content
+
+    def to_xml(self) -> str:
+        """
+        Serialize the file data to XML format.
+
+        This method generates an XML representation of the file including its GitHub
+        metadata and content, suitable for document storage or AI context input.
+        """
+        lines = list()
+        "https://easyscalecloud.atlassian.net/wiki/spaces/BD/pages/62128129/CHC+AI+Brain+Implementation+Proposal"
+        "/spaces/BD/pages/47251518/Case+Study+-+Transforming+Financial+Services+Building+an+Enterprise-Grade+AI+Infrastructure+for+Scalable+Innovation"
+        lines.append("<document>")
+        lines.append(f"{TAB}<source_type>Confluence Page</source_type>")
+        lines.append(f"{TAB}<confluence_url>{self.webui_url}</confluence_url>")
+        lines.append(f"{TAB}<title>{self.title}</path>")
+        # if self.description:
+        #     lines.append(f"{TAB}<description>")
+        #     lines.append(self.description)
+        #     lines.append(f"{TAB}</description>")
+        lines.append(f"{TAB}<markdown_content>")
+        lines.append(self.markdown)
+        lines.append(f"{TAB}</markdown_content>")
+        lines.append("</document>")
+
+        return "\n".join(lines)
+
+    def export_to_file(
+        self,
+        dir_out: Path,
+    ) -> Path:
+        fname = self.breadcrumb_path[3:].replace("||", "~")
+        basename = f"{fname}.xml"
+        path_out = dir_out.joinpath(basename)
+        content = self.to_xml()
+        try:
+            path_out.write_text(content, encoding="utf-8")
+        except FileNotFoundError:
+            path_out.parent.mkdir(parents=True)
+            path_out.write_text(content, encoding="utf-8")
+        return path_out
+
+
+def fetch_raw_pages_from_space(
+    confluence: pyatlassian.confluence.Confluence,
+    space_id: int,
+) -> list[ConfluencePage]:
+    """
+    Crawls and retrieves all pages from a Confluence space using pagination.
+
+    This function fetches raw page data from the Confluence API, converts each page
+    to a ConfluencePage object with minimal initialization, and returns the complete
+    collection without processing hierarchical relationships.
+
+    :param confluence: Authenticated Confluence API client
+    :param space_id: ID of the Confluence space to crawl
+
+    :returns: List of :class:`ConfluencePage` objects with initialized page_data and site_url,
+        but without hierarchy information (id_path, position_path, breadcrumb_path)
+    """
+    paginator = confluence.pagi_get_pages(
+        space_id=[int(space_id)],
+        body_format="atlas_doc_format",
+    )
+    confluence_page_list = list()
+    for ith, response in enumerate(paginator, start=1):
+        for page_data in response.get("results", []):
+            confluence_page = ConfluencePage(
+                page_data=page_data,
+                site_url=confluence.url,
+                id_path=None,
+                position_path=None,
+                breadcrumb_path=None,
+            )
+            confluence_page_list.append(confluence_page)
+    return confluence_page_list
+
+
+def enrich_pages_with_hierarchy_data(
+    raw_pages: list[ConfluencePage],
+) -> list[ConfluencePage]:
+    """
+    Enriches Confluence page objects with hierarchical relationship information.
+
+    This function processes a list of raw ConfluencePage objects to:
+
+    1. Create ID-based paths (id_path) representing the page hierarchy
+    2. Generate position-based paths (position_path) for correct sorting
+    3. Build human-readable title hierarchies (breadcrumb_path) for display
+
+    The function creates a complete hierarchy tree by iteratively processing pages
+    for up to 20 levels of depth, starting with parent pages and moving to children.
+
+    :param raw_pages: List of :class:`ConfluencePage` objects with basic data but no hierarchy info
+
+    :returns: List of :class:`ConfluencePage` objects enriched with hierarchy data and sorted by
+        their position in the hierarchy
+    """
+    # Create a mapping of page IDs to page objects for quick lookups
+    id_to_page_mapping: dict[str, ConfluencePage] = {
+        page.id: page for page in raw_pages
+    }
+
+    # Create a working copy of the mapping to track unprocessed pages
+    remaining_pages = dict(id_to_page_mapping)
+
+    # Limit recursion depth to avoid infinite loops with circular references
+    max_next_level = 20
+
+    # Process pages level by level, starting from root pages
+    for ith in range(1, 1 + max_next_level):
+        # print(
+        #     f"=== {ith = }, {len(remaining_pages) = }, {len(id_to_page_mapping) = }"
+        # )
+        # Exit if all pages have been processed
+        if len(remaining_pages) == 0:
+            break
+
+        # Process each remaining page
+        for id, page in list(remaining_pages.items()):
+            # Process root pages (no parent or parent outside our space)
+            if page.parent_id is None:
+                # Create hierarchy paths for root pages
+                path = f"/{page.id}"
+                sort_key = f"/{page.position}"
+                title_chain = f"|| {page.title}"
+                page.id_path = path
+                page.position_path = sort_key
+                page.breadcrumb_path = title_chain
+                # Remove from remaining pages as it's now processed
+                remaining_pages.pop(page.id)
+
+            # Process child pages
+            else:
+                # Check if the parent page is in our collection
+                if page.parent_id in id_to_page_mapping:
+                    parent_page = id_to_page_mapping[page.parent_id]
+                    # Skip if parent's paths aren't set yet (will process in later iteration)
+                    if parent_page.id_path is None:
+                        continue
+
+                    # Create hierarchy paths based on parent's paths
+                    page.id_path = f"{parent_page.id_path}/{id}"
+                    page.position_path = f"{parent_page.position_path}/{page.position}"
+                    page.breadcrumb_path = (
+                        f"{parent_page.breadcrumb_path} || {page.title}"
+                    )
+
+                    # Remove from remaining pages as it's now processed
+                    remaining_pages.pop(id)
+
+                # Handle pages with parents outside our scope (typically Confluence folders)
+                else:
+                    # Remove these pages from both mappings as they can't be processed
+                    remaining_pages.pop(id)
+                    id_to_page_mapping.pop(id)
+
+    # Sort pages based on their positions in the hierarchy
+    sorted_pages = list(
+        sorted(
+            id_to_page_mapping.values(),
+            key=lambda page: page.position_path,
+        )
+    )
+
+    return sorted_pages
+
+
+def load_or_build_page_hierarchy(
+    confluence: pyatlassian.confluence.Confluence,
+    space_id: int,
+    cache_key: str,
+    expire: int = 24 * 60 * 60,
+) -> list[ConfluencePage]:
+    """
+    Retrieves a complete Confluence page hierarchy with caching support.
+
+    This function either:
+
+    1. Returns a cached page hierarchy if available
+    2. Or fetches pages, builds their hierarchy, and caches the result
+
+    The function uses a composite cache key consisting of the Confluence URL,
+    space ID, and provided cache key to ensure proper cache isolation.
+    Results are compressed with gzip before caching to reduce storage usage.
+
+    :param confluence: Authenticated Confluence API client
+    :param space_id: ID of the Confluence space to crawl
+    :param cache_key: Additional key component for cache differentiation
+        (e.g., to cache different point-in-time snapshot of the same space)
+
+    :returns: List of :class:`ConfluencePage` objects with complete hierarchy data,
+        sorted by their hierarchical position
+    """
+    real_cache_key = (confluence.url, space_id, cache_key)
+    # print(f"{real_cache_key = }")  # for debug only
+    if real_cache_key in cache:  # pragma: no cover
+        print("Hit cache!")  # for debug only
+        cache_value = cache[real_cache_key]
+        data = json.loads(gzip.decompress(cache_value).decode("utf-8"))
+        sorted_pages = [ConfluencePage(**page_data) for page_data in data]
+        return sorted_pages
+    else:
+        raw_pages = fetch_raw_pages_from_space(
+            confluence=confluence,
+            space_id=space_id,
+        )
+        sorted_pages = enrich_pages_with_hierarchy_data(raw_pages=raw_pages)
+        data = [page.model_dump() for page in sorted_pages]
+        cache_value = gzip.compress(
+            json.dumps(data, ensure_ascii=False).encode("utf-8")
+        )
+        cache.set(real_cache_key, cache_value, expire=expire)
+        return sorted_pages
+
+
+def extract_id(url_or_id: str) -> str:
+    """
+    Extract the page ID from a Confluence URL or return the ID if directly provided.
+
+    This function handles different Confluence URL formats and extracts the page ID.
+    It also handles cases where the URL has a trailing /* or when just the ID is provided.
+
+    :param url_or_id: A Confluence page URL or direct page ID.
+        Example: "https://example.atlassian.net/wiki/spaces/BD/pages/123456/Value+Proposition"
+        or just "123456"
+
+    :return: The extracted page ID as a string
+    """
+    # If it's just an ID (possibly with /* at the end)
+    if "/" not in url_or_id or url_or_id.count("/") == 1 and url_or_id.endswith("/*"):
+        # Remove /* if present
+        return url_or_id.rstrip("/*")
+
+    # It's a URL, extract the ID which comes after /pages/ segment
+    parts = url_or_id.split("/pages/")
+    if len(parts) != 2:
+        raise ValueError(f"Invalid Confluence URL format: {url_or_id}")
+
+    # The ID is the segment after /pages/ and before the next /
+    id_and_title = parts[1].split("/", 1)
+    return id_and_title[0]
+
+
+def process_include_exclude(
+    include: list[str],
+    exclude: list[str],
+) -> tuple[list[str], list[str]]:
+    """
+    Process include and exclude patterns for Confluence page IDs or URLs.
+
+    This function takes lists of include and exclude patterns that might be
+    Confluence page URLs or IDs, extracts the page IDs from them, and preserves
+    any trailing wildcards (/*). It normalizes all inputs to a consistent format
+    of either just the ID or ID with wildcard.
+
+    :param include: List of Confluence page URLs or IDs to include
+        Items can be full URLs, page IDs, or patterns with /* suffix
+    :param exclude: List of Confluence page URLs or IDs to exclude
+        Items can be full URLs, page IDs, or patterns with /* suffix
+
+    :return: A tuple of two lists:
+        1. Normalized include patterns with extracted IDs
+        2. Normalized exclude patterns with extracted IDs
+    """
+    new_include, new_exclude = list(), list()
+    for expr in include:
+        id = extract_id(expr)
+        if expr.endswith("/*"):
+            new_include.append(id + "/*")
+        else:
+            new_include.append(id)
+    for expr in exclude:
+        id = extract_id(expr)
+        if expr.endswith("/*"):
+            new_exclude.append(id + "/*")
+        else:
+            new_exclude.append(id)
+    return new_include, new_exclude
+
+
+def is_matching(
+    page_mapping: dict[str, ConfluencePage],
+    page: ConfluencePage,
+    include: T.List[str],
+    exclude: T.List[str],
+) -> bool:
+    """
+    Determine if a Confluence page matches the include/exclude filtering criteria.
+
+    This function implements the filtering logic similar to gitignore patterns, where:
+
+    - A page is included if it matches any include pattern
+    - A page is excluded if it matches any exclude pattern
+    - Patterns with /* suffix match the specified page and all its descendants
+    - If no include patterns are provided, all pages are initially included (before exclusions)
+
+    :param page_mapping: Dictionary mapping page IDs to their ConfluencePage objects
+        for efficient parent-child relationship lookups
+    :param page: The ConfluencePage object to check against the filters
+    :param include: List of normalized page IDs or page ID patterns (with /* suffix)
+        to include in results. This is a processed "include" list from process_include_exclude()
+    :param exclude: List of normalized page IDs or page ID patterns (with /* suffix)
+        to exclude from results. This is a processed "exclude" list from process_include_exclude()
+
+    :return: True if the page should be included in the results, False otherwise
+    """
+    # Process include patterns - a page must match at least one include pattern to be considered
+    if len(include):
+        include_flag = False
+        for expr in include:
+            if expr.endswith("/*"):
+                # This is a hierarchical include pattern (folder and all children)
+                parent_id = expr.rstrip("/*")
+                if parent_id in page_mapping:
+                    parent_page = page_mapping[parent_id]
+                    # Check if current page is a descendant of the specified parent
+                    if page.id_path.startswith(parent_page.id_path):
+                        include_flag = True
+                        break
+            elif page.id == expr.rstrip("/*"):
+                # Direct page ID match
+                include_flag = True
+                break
+    else:
+        # No include patterns specified - include all pages by default
+        include_flag = True
+
+    # If page didn't match any include patterns, exclude it
+    if include_flag is False:
+        return False
+
+    # Process exclude patterns - a page matching any exclude pattern is filtered out
+    for expr in exclude:
+        if expr.endswith("/*"):
+            # This is a hierarchical exclude pattern (folder and all children)
+            parent_id = expr.rstrip("/*")
+            if parent_id in page_mapping:
+                parent_page = page_mapping[parent_id]
+                # Check if current page is a descendant of the excluded parent
+                if page.id_path.startswith(parent_page.id_path):
+                    return False
+        elif page.id == expr.rstrip("/*"):
+            # Direct page ID match for exclusion
+            return False
+
+    # Page didn't hit all exclude filter criteria
+    return True
+
+
+def find_matching_pages(
+    sorted_pages: list[ConfluencePage],
+    include: T.List[str],
+    exclude: T.List[str],
+):
+    """
+    Filter Confluence pages based on include/exclude patterns similar to gitignore.
+
+    This function lets you specify which pages to include or exclude using either
+    direct page IDs or hierarchical patterns. It supports URL or ID formats and
+    allows using /* suffix to indicate a page and all its descendants (like a folder).
+
+    Filtering logic follows these rules:
+
+    1. First, normalize all URL or ID patterns to a consistent format
+    2. Pages matching any include pattern are considered (or all if no include patterns)
+    3. Then, any page matching an exclude pattern is filtered out
+    4. Patterns with /* match the specified page and all its descendants
+
+    :param sorted_pages: List of :class:`ConfluencePage` objects sorted by hierarchy
+        (typically from `enrich_pages_with_hierarchy_data`)
+    :param include: List of Confluence page URLs or IDs to include
+        Can be full URLs, page IDs, or patterns with /* suffix
+    :param exclude: List of Confluence page URLs or IDs to exclude
+        Can be full URLs, page IDs, or patterns with /* suffix
+
+    :return: Filtered list of :class:`ConfluencePage` objects that match the criteria
+    """
+    page_mapping = {page.id: page for page in sorted_pages}
+    matched_pages = list()
+    new_include, new_exclude = process_include_exclude(include, exclude)
+    for page in sorted_pages:
+        flag = is_matching(
+            page_mapping=page_mapping,
+            page=page,
+            include=new_include,
+            exclude=new_exclude,
+        )
+        if flag:
+            matched_pages.append(page)
+    return matched_pages
+
+
+class ConfluencePipeline(BaseModel):
+    """
+    A data pipeline that extracts and synchronizes Confluence pages to a target location.
+
+    ConfluencePipeline provides an abstraction for defining a Confluence space source and
+    filtering criteria, then exporting the matching pages to a specified output directory
+    as structured XML documents that preserve both content and metadata.
+
+    The pipeline handles the complete workflow from authentication to content extraction,
+    hierarchical processing, filtering, and file export with metadata preservation.
+
+    Example:
+
+    .. code-block:: python
+
+        confluence_pipeline = ConfluencePipeline(
+            confluence=confluence,
+            space_id=space_id,
+            # Use cache key to avoid re-fetching the same page hierarchy
+            # it will store all pages in the cache and use it for filtering
+            # if you change the include / exclude pattern
+            cache_key=cache_key,
+            include=[
+                # include all child page
+                f"{confluence.url}/wiki/spaces/{space_key}/pages/{page_id}/{page_title}/*",
+                # only include this page, no child page
+                f"{confluence.url}/wiki/spaces/{space_key}/pages/{page_id}/{page_title}",
+            ],
+            exclude=[
+                # exclude all child page
+                f"{confluence.url}/wiki/spaces/{space_key}/pages/{page_id}/{page_title}/*",
+                # only exclude this page, no child page
+                f"{confluence.url}/wiki/spaces/{space_key}/pages/{page_id}/{page_title}",
+            ],
+        )
+
+
+    :param confluence: Authenticated Confluence API client instance
+    :param space_id: ID of the Confluence space to process
+    :param include: List of patterns (URLs or IDs) specifying which pages to include.
+        Use Page URL + ``/*`` to include all children of a page.
+    :param exclude: List of patterns (URLs or IDs) specifying which pages to exclude
+        Use Page URL + ``/*`` to include all children of a page.
+    :param dir_out: The directory where the XML files should be exported
+    :param cache_key: Key for caching and retrieving page hierarchies
+    :param cache_expire: Cache expiration time in seconds (default: 24 hours)
+    """
+    confluence: pyatlassian.confluence.Confluence = Field()
+    space_id: int = Field()
+    include: T.List[str] = Field()
+    exclude: T.List[str] = Field()
+    dir_out: Path = Field()
+    cache_key: str = Field()
+    cache_expire: int = Field(default=24 * 60 * 60)
+
+    def post_process_confluence_page(
+        self,
+        confluence_page: ConfluencePage,
+    ) -> ConfluencePage:
+        return confluence_page
+
+    def post_process_path_out(
+        self,
+        confluence_page: ConfluencePage,
+        path_out: Path,
+    ):
+        pass
+
+    def fetch(self):
+        """
+        Execute the pipeline to extract and export Confluence pages to the target directory.
+
+        This method performs the complete workflow:
+
+        1. List all pages in the given Confluence space that match the include/exclude patterns
+        2. Converts each page to a ConfluencePage object with metadata
+        3. Exports each page as an XML document to the specified output directory
+        """
+        sorted_pages = load_or_build_page_hierarchy(
+            confluence=self.confluence,
+            space_id=self.space_id,
+            cache_key=self.cache_key,
+        )
+        matched_pages = find_matching_pages(
+            sorted_pages=sorted_pages,
+            include=self.include,
+            exclude=self.exclude,
+        )
+        for page in matched_pages:
+            page = self.post_process_confluence_page(page)
+            path_out = page.export_to_file(dir_out=self.dir_out)
+            self.post_process_path_out(confluence_page=page, path_out=path_out)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docs/source/notebook_to_markdown.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docs/source/notebook_to_markdown.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+import subprocess
+from pathlib import Path
+from docpack.paths import dir_docs_source, dir_venv_bin
+
+bin_jupyter = dir_venv_bin / "jupyter"
+
+for path_notebook in dir_docs_source.glob("**/*.ipynb"):
+    if ".ipynb_checkpoints" in str(path_notebook):
+        continue
+    path_markdown = path_notebook.parent / "index.md"
+    args = [
+        f"{bin_jupyter}",
+        "nbconvert",
+        "--to",
+        "markdown",
+        str(path_notebook),
+        "--output",
+        str(path_markdown),
+    ]
+    cmd = " ".join(args)
+    print(f"run command: {cmd}")
+    subprocess.run(args, check=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/README.rst</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>README.rst</path>
+  <content>
+
+.. image:: https://readthedocs.org/projects/docpack/badge/?version=latest
+    :target: https://docpack.readthedocs.io/en/latest/
+    :alt: Documentation Status
+
+.. image:: https://github.com/MacHu-GWU/docpack-project/actions/workflows/main.yml/badge.svg
+    :target: https://github.com/MacHu-GWU/docpack-project/actions?query=workflow:CI
+
+.. image:: https://codecov.io/gh/MacHu-GWU/docpack-project/branch/main/graph/badge.svg
+    :target: https://codecov.io/gh/MacHu-GWU/docpack-project
+
+.. image:: https://img.shields.io/pypi/v/docpack.svg
+    :target: https://pypi.python.org/pypi/docpack
+
+.. image:: https://img.shields.io/pypi/l/docpack.svg
+    :target: https://pypi.python.org/pypi/docpack
+
+.. image:: https://img.shields.io/pypi/pyversions/docpack.svg
+    :target: https://pypi.python.org/pypi/docpack
+
+.. image:: https://img.shields.io/badge/Release_History!--None.svg?style=social
+    :target: https://github.com/MacHu-GWU/docpack-project/blob/main/release-history.rst
+
+.. image:: https://img.shields.io/badge/STAR_Me_on_GitHub!--None.svg?style=social
+    :target: https://github.com/MacHu-GWU/docpack-project
+
+------
+
+.. image:: https://img.shields.io/badge/Link-Document-blue.svg
+    :target: https://docpack.readthedocs.io/en/latest/
+
+.. image:: https://img.shields.io/badge/Link-API-blue.svg
+    :target: https://docpack.readthedocs.io/en/latest/py-modindex.html
+
+.. image:: https://img.shields.io/badge/Link-Install-blue.svg
+    :target: `install`_
+
+.. image:: https://img.shields.io/badge/Link-GitHub-blue.svg
+    :target: https://github.com/MacHu-GWU/docpack-project
+
+.. image:: https://img.shields.io/badge/Link-Submit_Issue-blue.svg
+    :target: https://github.com/MacHu-GWU/docpack-project/issues
+
+.. image:: https://img.shields.io/badge/Link-Request_Feature-blue.svg
+    :target: https://github.com/MacHu-GWU/docpack-project/issues
+
+.. image:: https://img.shields.io/badge/Link-Download-blue.svg
+    :target: https://pypi.org/pypi/docpack#files
+
+
+Welcome to ``docpack`` Documentation
+==============================================================================
+.. image:: https://docpack.readthedocs.io/en/latest/_static/docpack-logo.png
+    :target: https://docpack.readthedocs.io/en/latest/
+
+DocPack is a Python utility library designed to efficiently consolidate documentation from multiple sources (GitHub, Confluence, and local file systems) into a single, AI-accessible knowledge base. It provides tools for retrieving, formatting, and packaging document content with consistent structure to facilitate efficient reference by Large Language Models.
+
+
+.. _install:
+
+Install
+------------------------------------------------------------------------------
+
+``docpack`` is released on PyPI, so all you need is to:
+
+.. code-block:: console
+
+    $ pip install docpack
+
+To upgrade to latest version:
+
+.. code-block:: console
+
+    $ pip install --upgrade docpack
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/genai/README.rst</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>genai/README.rst</path>
+  <content>
+https://claude.ai/project/2190c2f0-64c6-4c6c-8e8c-84b880781bf0
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s02_8_poetry_export.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s02_8_poetry_export.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.poetry_export(with_hash=False, real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s02_5_install_doc.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s02_5_install_doc.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.poetry_install_doc(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docs/source/03-Confluence-Fetcher/index.rst</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docs/source/03-Confluence-Fetcher/index.rst</path>
+  <content>
+Confluence Page Fetching Tutorial
+==============================================================================
+See :class:`~docpack.confluence_fetcher.ConfluencePipeline`.
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/release-history.rst</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>release-history.rst</path>
+  <content>
+.. _release_history:
+
+Release and Version History
+==============================================================================
+
+
+x.y.z (Backlog)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+**Minor Improvements**
+
+**Bugfixes**
+
+**Miscellaneous**
+
+
+0.1.1 (2025-03-03)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- First release
+- Add the following public APIs:
+    - ``docpack.api.find_matching_files``
+    - ``docpack.api.GitHubFile``
+    - ``docpack.api.GitHubPipeline``
+    - ``docpack.api.ConfluencePage``
+    - ``docpack.api.ConfluencePipeline``
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s03_2_run_cov_test.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s03_2_run_cov_test.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.run_cov_test(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s03_4_run_int_test.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s03_4_run_int_test.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.run_int_test(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/constants.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/constants.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+
+TAB = " " * 2
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s02_7_install_all.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s02_7_install_all.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.poetry_install_all(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/_version.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/_version.py</path>
+  <content>
+#!/usr/bin/env python
+# This file is automatically generated by pywf script
+# based on the content in pyproject.toml file
+
+__version__ = "0.1.2"
+__short_description__ = "DocPack efficiently consolidates documentation from GitHub, Confluence, and files into a structured knowledge base for AI access."
+__license__ = "MIT"
+__author__ = "Sanhe Hu"
+__author_email__ = "husanhe@gmail.com"
+__maintainer__ = "Sanhe Hu"
+__maintainer_email__ = "husanhe@gmail.com"
+
+# run this script to print out the version number
+if __name__ == "__main__":  # pragma: no cover
+    print(__version__)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/poetry.toml</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>poetry.toml</path>
+  <content>
+[virtualenvs]
+in-project = true
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s02_0_poetry_lock.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s02_0_poetry_lock.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.poetry_lock(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s05_1_build_package.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s05_1_build_package.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+We primarily use poetry to build the package.
+"""
+
+from pywf import pywf
+
+# pywf.python_build(real_run=True, verbose=True)
+pywf.poetry_build(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s01_1_venv_create.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s01_1_venv_create.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.create_virtualenv(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/pyproject.toml</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>pyproject.toml</path>
+  <content>
+# ==============================================================================
+# The [project] table defined by Official python.org
+#
+# Read: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+# ==============================================================================
+[project]
+name = "docpack"
+# Increment version before each release - follow `semantic versioning <https://semver.org/>`_
+# Currently, poetry 2.1.X doesn't support dynamic versioning
+# (Read https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#version)
+# So this value has to be aligned with the one in ``cookiecutter_pyproject_demo/_version.py``
+version = "0.1.2"
+description = "DocPack efficiently consolidates documentation from GitHub, Confluence, and files into a structured knowledge base for AI access."
+# Read https://dev-exp-share.readthedocs.io/en/latest/search.html?q=Pick+An+Open+Source+License+For+Python+Project&check_keywords=yes&area=default
+# To pick a license and update the ``license``, ``classifier`` field in ``pyproject.toml``
+# And also update the ``LICENSE.txt`` file in the git repo.
+license = "MIT"
+license-files = ["LICENSE.txt", "AUTHORS.rst"]
+authors = [
+    { name = "Sanhe Hu", email = "husanhe@gmail.com" },
+]
+maintainers = [
+    { name = "Sanhe Hu", email = "husanhe@gmail.com" },
+]
+keywords = []
+readme = "README.rst"
+# Files to include in the package distribution
+include = [
+    "*.txt",
+    "*.rst",
+]
+# Files to exclude from the package
+exclude = [
+    "*.pyc",
+    "*.pyo",
+    "cookiecutter_pyproject_demo/docs/*",
+    "cookiecutter_pyproject_demo/tests/*",
+]
+requires-python = ">=3.9,<4.0"
+# Full list of classifiers: https://pypi.org/classifiers/
+classifier = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Operating System :: Unix",
+    # Note: classfier like "Programming Language :: Python :: 3 :: Only",
+    # "Programming Language :: Python :: 3.X" is no longer needed,
+    # because we have ``requires-python`` field.
+]
+
+# ------------------------------------------------------------------------------
+# Core Dependencies
+# ------------------------------------------------------------------------------
+dependencies = [
+    "pathpick>=0.1.1,<1.0.0",
+    "pyatlassian>=0.3.1,<1.0.0",
+    "atlas_doc_parser>=0.1.2,<1.0.0",
+    "pydantic>=2.9.2,<3.0.0",
+    "diskcache>=5.6.3,<6.0.0",
+]
+
+# ------------------------------------------------------------------------------
+# Optional dependency that can be used in ``pip install ${your_project_name}[${feature_name}]``
+# Sometime this is also called "extras"
+# Read: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#dependencies-optional-dependencies
+#
+# IMPORTANT: all optional dependencies has to be compatible with the "requires-python" field
+# ------------------------------------------------------------------------------
+[project.optional-dependencies]
+
+# ------------------------------------------------------------------------------
+# Local Development dependenceies
+# ------------------------------------------------------------------------------
+dev = [
+    "twine>=6.0.0,<7.0.0", # distribute package to PyPI
+    "wheel>=0.45.0,<1.0.0", # build wheel package
+    "build>=1.2.1,<2.0.0", # build source distribution
+    "rich>=13.8.1,<14.0.0", # pretty print
+]
+
+# ------------------------------------------------------------------------------
+# (Unit/Coverage/Integration/Load) Test dependenceies
+# ------------------------------------------------------------------------------
+test = [
+    "pytest>=8.2.2,<9.0.0", # Testing framework
+    "pytest-cov>=6.0.0,<7.0.0", # Coverage reporting
+]
+
+# ------------------------------------------------------------------------------
+# Documentation build dependenceies
+# ------------------------------------------------------------------------------
+doc = [
+    "Sphinx>=7.4.7,<8.0.0",
+    "sphinx-copybutton>=0.5.2,<1.0.0", # add copy button to code block
+    "sphinx-design>=0.6.1,<1.0.0", # add additional design pattern to sphinx
+    "sphinx-jinja>=2.0.2,<3.0.0", # enable jinja syntax in reStructuredText
+    "furo==2024.8.6", # the furo sphinx theme
+    "pygments>=2.18.0,<3.0.0", # syntax highlight
+    "ipython>=8.18.1,<8.19.0", # interactive Python
+    "nbsphinx>=0.8.12,<1.0.0", # add jupyter notebook in sphinx doc
+    "rstobj==1.2.1", # generate reStructuredText from Python code
+    "docfly==2.0.3", # automaticall generate .. toctree directives and API reference doc
+]
+
+# ------------------------------------------------------------------------------
+# Automation (devops) dependenceies
+# ------------------------------------------------------------------------------
+auto = [
+]
+
+# Quick Links
+[project.urls]
+Homepage = "https://github.com/MacHu-GWU/docpack-project"
+Documentation = "https://docpack.readthedocs.io/en/latest/"
+Repository = "https://github.com/MacHu-GWU/docpack-project"
+Issues = "https://github.com/MacHu-GWU/docpack-project/issues"
+Changelog = "https://github.com/MacHu-GWU/docpack-project/blob/main/release-history.rst"
+Download = "https://pypi.org/pypi/docpack#files"
+
+# For command line interface, read: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#creating-executable-scripts
+[project.scripts]
+
+[tool.poetry.requires-plugins]
+poetry-plugin-export = ">=1.9.0,<2.0.0"
+
+# python workflow tool config
+[tool.pywf]
+# The specific python version you use for local development
+dev_python = "3.11.8"
+# github.com account name (for unit test)
+github_account = "MacHu-GWU"
+# Create GitHub token in https://github.com/settings/tokens and put the token at
+# ``${HOME}/.github/${github_account}/pac/${github_token_name}.txt``
+github_token_name = "sanhe-dev"
+# codecov.io (for code coverage test report) account name
+# If you use GitHub account to login codecov.io, then it is the same as your github account
+codecov_account = "MacHu-GWU"
+# Create Codecov token in https://app.codecov.io/account/gh/${codecov_account}/access and put the token at
+# ``${HOME}/.codecov/github/${codecov_account}/${codecov_token_name}.txt``
+codecov_token_name = "sanhe-dev"
+# readthedocs.org user name (for documentation hosting)
+readthedocs_username = "machugwu"
+# Readthedocs project name, usually it is the same as your project name
+readthedocs_project_name = "docpack"
+# Create Readthedocs token in https://app.readthedocs.org/accounts/tokens/ and put the token at
+# ``${HOME}/.readthedocs/${readthedocs_username}/${readthedocs_token_name}.txt``
+readthedocs_token_name = "sanhe-dev"
+
+# Read: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#declaring-the-build-backend
+[build-system]
+requires = ["poetry-core>=2.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s02_3_install_dev.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s02_3_install_dev.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.poetry_install_dev(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/.coveragerc</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>.coveragerc</path>
+  <content>
+# Coverage.py is a tool for measuring code coverage of Python programs.
+# for more info: https://coverage.readthedocs.io/en/latest/config.html
+[run]
+omit =
+    docpack/docs/*
+    docpack/tests/*
+    docpack/vendor/*
+    docpack/_version.py
+    docpack/cli.py
+    docpack/paths.py
+
+[report]
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+
+    # Don't complain about missing debug-only code:
+    def __repr__
+    if self\.debug
+
+    # Don't complain if tests don't hit defensive assertion code:
+    raise AssertionError
+    raise NotImplementedError
+
+    # Don't complain if non-runnable code isn't run:
+    if 0:
+    if __name__ == .__main__.:
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s06_2_setup_readthedocs.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s06_2_setup_readthedocs.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.setup_readthedocs_project(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docs/source/02-GitHub-Fetcher/index.md</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docs/source/02-GitHub-Fetcher/index.md</path>
+  <content>
+# GitHub Document Fetching Tutorial
+
+This tutorial demonstrates how to use the [docpack](https://github.com/MacHu-GWU/docpack-project) library to efficiently extract and process documentation from GitHub repositories. Whether you're building an AI knowledge base, centralizing documentation across multiple projects, or preparing content for analysis, ``docpack`` provides a streamlined way to fetch, transform, and organize GitHub files with rich metadata. By following this notebook, you'll learn how to set up document extraction pipelines that can filter files using glob patterns, preserve contextual information like repository structure, and output consistently formatted files ready for integration with AI systems or documentation platforms. This approach eliminates manual document gathering and ensures your knowledge base stays synchronized with your source repositories.
+
+## Setting Up the GitHub Fetching Pipeline
+
+Before diving into the actual implementation, let's understand how to use the ``GitHubPipeline`` class to extract documents from GitHub repositories. This approach allows you to selectively fetch files while preserving their original context and metadata.
+The code below demonstrates setting up a pipeline that fetches selected files from a GitHub repository. The pipeline uses glob patterns to determine which files to include and exclude - a powerful pattern-matching approach similar to ``.gitignore`` files.
+
+
+```python
+import shutil
+from pathlib import Path
+
+from docpack.github_fetcher import GitHubPipeline
+```
+
+
+```python
+dir_here = Path.cwd().absolute()
+dir_tmp = dir_here / "tmp"
+print(f"{dir_tmp = !s}")
+shutil.rmtree(dir_tmp, ignore_errors=True)
+
+dir_repo = Path.cwd().parent.parent.parent
+print(f"{dir_repo = !s}")
+```
+
+    dir_tmp = /Users/sanhehu/Documents/GitHub/docpack-project/docs/source/02-GitHub-Fetcher/tmp
+    dir_repo = /Users/sanhehu/Documents/GitHub/docpack-project
+
+
+**Key Points About File Filtering**
+
+Include-Exclude Pattern Matching:
+
+1. The pipeline uses glob patterns to filter files
+    - If a file matches ANY pattern in the include list, it's initially considered for inclusion
+    - If a file matches ANY pattern in the exclude list, it's excluded regardless of inclusion rules
+    - If both include and exclude patterns match a file, exclusion takes precedence
+2. Understanding Glob Patterns:
+    - Patterns are relative to the repository root
+    - ``**/*.py`` means "any Python file in any directory or subdirectory"
+    - ``/**/`` indicates recursive matching through all subdirectories
+    - For expression in ``exclude``, it is not exactly the glob pattern. For example ``exclude = ["docpack/tests/**", ...]`` means exclude any file in ``docpack/tests`` directory but not in subdirectories, in order to exclude all files in ``docpack/tests`` directory and subdirectories, you have to do both.
+    - Simple patterns like ``README.rst`` match specific files
+3. ``dir_out`` specifies the directory where the AI friendly XML files should be exported.
+
+When the ``fetch()`` method is called, the pipeline processes all files matching the include patterns (but not matching exclude patterns) and exports them to the specified output directory with their metadata intact.
+
+
+```python
+gh_pipeline = GitHubPipeline(
+    domain="github.com",
+    account="MacHu-GWU",
+    repo="docpack-project",
+    branch="main",
+    dir_repo=dir_repo,
+    include=[
+        f"README.rst",
+        "docpack/**/*.py",
+        "tests/**/*.py",
+        "docs/source/**/index.rst",
+    ],
+    exclude=[
+        "docpack/tests/**",
+        "docpack/tests/**/*.*",
+        "docpack/vendor/**",
+        "docpack/vendor/**/*.*",
+        "tests/all.py",
+        "tests/**/all.py",
+        "docs/source/index.rst",
+    ],
+    dir_out=dir_tmp,
+)
+gh_pipeline.fetch()
+```
+
+## Exploring the Extracted Documents
+
+After running the pipeline, let's examine the output files to understand what docpack produces. The code below displays the first 500 characters from five randomly selected output files:
+
+
+```python
+for path in list(dir_tmp.glob("*.xml"))[:5]:
+    print("#" + "=" * 60)
+    print(f"| content of {path.name!r}")
+    print("#" + "=" * 60)
+    print(path.read_text()[:500] + "\n...")
+```
+
+    #============================================================
+    | content of 'docpack~paths.py~e12af5d.xml'
+    #============================================================
+    <document>
+      <source_type>GitHub Repository</source_type>
+      <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/paths.py</github_url>
+      <account>MacHu-GWU</account>
+      <repo>docpack-project</repo>
+      <branch>main</branch>
+      <path>docpack/paths.py</path>
+      <content>
+    # -*- coding: utf-8 -*-
+    
+    from pathlib import Path
+    
+    dir_here = Path(__file__).absolute().parent
+    dir_package = dir_here
+    PACKAGE_NAME = dir_here.name
+    dir_home = Path.home()
+    
+    dir_project_root = dir_here.parent
+    dir_tmp
+    ...
+    #============================================================
+    | content of 'tests~test_api.py~9fb2de7.xml'
+    #============================================================
+    <document>
+      <source_type>GitHub Repository</source_type>
+      <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/tests/test_api.py</github_url>
+      <account>MacHu-GWU</account>
+      <repo>docpack-project</repo>
+      <branch>main</branch>
+      <path>tests/test_api.py</path>
+      <content>
+    # -*- coding: utf-8 -*-
+    
+    from docpack import api
+    
+    
+    def test():
+        _ = api
+    
+    
+    if __name__ == "__main__":
+        from docpack.tests import run_cov_test
+    
+        run_cov_test(__file__, "docpack.api", preview=False)
+    
+      </c
+    ...
+    #============================================================
+    | content of 'docpack~__init__.py~98a2489.xml'
+    #============================================================
+    <document>
+      <source_type>GitHub Repository</source_type>
+      <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/__init__.py</github_url>
+      <account>MacHu-GWU</account>
+      <repo>docpack-project</repo>
+      <branch>main</branch>
+      <path>docpack/__init__.py</path>
+      <content>
+    # -*- coding: utf-8 -*-
+    
+    """
+    DocPack efficiently consolidates documentation from GitHub, Confluence, and files into a structured knowledge base for AI access.
+    """
+    
+    from ._version import __version__
+    
+    __short_
+    ...
+    #============================================================
+    | content of 'tests~test_github_fetcher.py~b480033.xml'
+    #============================================================
+    <document>
+      <source_type>GitHub Repository</source_type>
+      <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/tests/test_github_fetcher.py</github_url>
+      <account>MacHu-GWU</account>
+      <repo>docpack-project</repo>
+      <branch>main</branch>
+      <path>tests/test_github_fetcher.py</path>
+      <content>
+    # -*- coding: utf-8 -*-
+    
+    import shutil
+    from docpack.github_fetcher import (
+        extract_domain,
+        GitHubPipeline,
+    )
+    from docpack.paths import (
+        dir_project_root,
+        dir_tmp,
+        PACK
+    ...
+    #============================================================
+    | content of 'docpack~github_fetcher.py~6458e19.xml'
+    #============================================================
+    <document>
+      <source_type>GitHub Repository</source_type>
+      <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/github_fetcher.py</github_url>
+      <account>MacHu-GWU</account>
+      <repo>docpack-project</repo>
+      <branch>main</branch>
+      <path>docpack/github_fetcher.py</path>
+      <content>
+    # -*- coding: utf-8 -*-
+    
+    """
+    GitHub file extraction and synchronization utilities for documentation packaging.
+    
+    This module provides tools for retrieving, processing, and exporting files from Git
+    ...
+
+
+Each extracted file is saved in a structured XML format that preserves both the content and rich contextual metadata from the original GitHub repository. The XML structure includes:
+
+- ``<source_type>``: Identifies the origin as a GitHub repository
+- ``<github_url>``: Direct link to view the file in GitHub's web interface
+- ``<account>``, ``<repo>``, ``<branch>``: Repository metadata for complete context
+- ``<path>``: The file's location within the repository structure
+- ``<content>``: The actual file content, preserved exactly as in the original
+
+This format is particularly valuable for AI-powered documentation systems and knowledge bases because it maintains the complete context of each file. When using this data with an AI assistant, the assistant can not only access the file content but also provide source links for verification, understand the file's position in the project hierarchy, and maintain references to the original repository.
+
+Notice how the filenames contain both the path (with '~' replacing '/') and a unique hash, ensuring each file has a distinct, identifiable name while preserving its original location information.
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/.github/workflows/main.yml</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>.github/workflows/main.yml</path>
+  <content>
+# comprehensive github action yml reference: https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions
+
+---
+name: CI
+
+on:
+  push: # any push event to master will trigger this
+    branches: ["main"]
+  pull_request: # any pull request to master will trigger this
+    branches: ["main"]
+  workflow_dispatch: # allows you to manually trigger run
+
+jobs:
+  tests:
+    name: "${{ matrix.os }} Python ${{ matrix.python-version }}"
+    runs-on: "${{ matrix.os }}" # for all available VM runtime, see this: https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners
+    env: # define environment variables
+      USING_COVERAGE: "3.9,3.10,3.11,3.12,3.13"
+    strategy:
+      matrix:
+#        os: ["ubuntu-latest", "windows-latest"]
+        os: ["ubuntu-latest", ] # for debug only
+#        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", ] # for debug only
+        exclude:
+          - os: windows-latest # this is a useless exclude rules for demonstration use only
+            python-version: 2.7
+    steps:
+      - uses: "actions/checkout@v3" # https://github.com/marketplace/actions/checkout
+      - uses: "actions/setup-python@v4" # https://github.com/marketplace/actions/setup-python
+        with:
+          python-version: "${{ matrix.python-version }}"
+
+      - if: matrix.os == 'ubuntu-latest' # for condition steps, you should put if at begin, and use single quote for logical expression
+        name: "Install dependencies on MacOS or Linux"
+        run: |
+          set -xe
+          python -VV
+          python -m site
+          python -m pip install --upgrade pip setuptools wheel virtualenv
+          pip install -r requirements.txt
+          pip install -r requirements-test.txt
+          pip install .
+      - if: matrix.os == 'windows-latest'
+        name: "Install dependencies on Windows"
+        run: |
+          python -m site
+          python -m pip install --upgrade pip setuptools wheel virtualenv
+          pip install -r requirements.txt
+          pip install -r requirements-test.txt
+          pip install .
+      - name: "Run pytest"
+        run: "python -m pytest tests --cov=docpack"
+        env: # Or as an environment variable
+          CONF_URL: ${{ secrets.CONF_URL }}
+          CONF_USERNAME: ${{ secrets.CONF_USERNAME }}
+          CONF_PASSWORD: ${{ secrets.CONF_PASSWORD }}
+      # don't forget to goto codecov.io, enable your repo, copy the token
+      # create an CODECOV_TOKEN env var in GitHub actions secret
+      - name: "Upload coverage to Codecov"
+        if: "contains(env.USING_COVERAGE, matrix.python-version)"
+        uses: "codecov/codecov-action@v3" # https://github.com/marketplace/actions/codecov
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: MacHu-GWU/docpack-project
+          fail_ci_if_error: true
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s05_2_publish_package.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s05_2_publish_package.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+We primarily use twine to publish the package for open source project.
+"""
+
+from pywf import pywf
+
+pywf.twine_upload()
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s03_3_view_cov_result.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s03_3_view_cov_result.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.view_cov(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s03_5_run_load_test.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s03_5_run_load_test.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.run_load_test(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s02_2_install.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s02_2_install.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.poetry_install(real_run=True, verbose=True)
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/find_matching_files.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/find_matching_files.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+"""
+Provides utilities for finding files in a directory hierarchy using glob patterns.
+This module offers functions to efficiently filter files by include/exclude patterns,
+similar to .gitignore functionality. It supports recursive directory traversal,
+pattern matching, and duplicate handling, making it ideal for selectively processing
+files in complex directory structures while maintaining a clean filtering approach.
+"""
+
+import typing as T
+from pathlib import Path
+
+from pathpick.api import PathPick
+
+
+def remove_dupes(lst: list) -> list:
+    """
+    Remove duplicates from a list while preserving order.
+
+    This function returns a new list containing unique elements from the input list,
+    maintaining their original order. The input list remains unchanged, and the
+    returned list has a different identity (i.e., a new object in memory).
+    """
+    return list(dict.fromkeys(lst))
+
+
+def process_include_exclude(
+    include: list[str],
+    exclude: list[str],
+) -> tuple[list[str], list[str]]:
+    """
+    Process include and exclude glob patterns to prepare them for file filtering operations.
+
+    This function normalizes the include and exclude pattern lists by:
+
+    1. Setting a default include pattern of ["**/*.*"] if none provided
+    2. Removing duplicate patterns from both lists while preserving order
+    """
+    if not include:
+        include = ["**/*.*"]
+    include = remove_dupes(include)
+    exclude = remove_dupes(exclude)
+    return include, exclude
+
+
+def find_matching_files(
+    dir_root: Path,
+    include: list[str],
+    exclude: list[str],
+) -> T.Iterable[Path]:
+    """
+    Find files in a directory that match include patterns but not exclude patterns.
+
+    This function recursively searches through the directory tree starting from dir_root,
+    filtering files using two sets of glob patterns:
+
+    1. First, files are included if they match any pattern in the include list
+       (or all files if include list is empty)
+    2. Then, matching files are excluded if they match any pattern in the exclude list
+
+    .. note::
+
+        We use `pathpick <https://github.com/MacHu-GWU/pathpick-project>`_ library
+        under the hood.
+
+    :param dir_root: The root directory to start the search from
+    :param include: List of glob patterns to match files for inclusion
+        If empty, defaults to ["**/*.*"] (all files)
+    :param exclude: List of glob patterns to exclude files from the results
+        If empty, no files are excluded
+    """
+    # process input parameter
+    if not dir_root.exists() or not dir_root.is_dir():
+        raise ValueError(f"Directory {dir_root} does not exist or is not a directory")
+
+    path_pick = PathPick.new(include=include, exclude=exclude)
+    for path in dir_root.glob("**/*.*"):
+        if path_pick.is_match(str(path.relative_to(dir_root))):
+            yield path
+
+  </content>
+</document>
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/cache.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/cache.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+from diskcache import Cache
+
+from .paths import dir_cache
+
+cache = Cache(str(dir_cache))
+
+  </content>
+</document>

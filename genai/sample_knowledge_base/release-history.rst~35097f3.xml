@@ -1,0 +1,37 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/release-history.rst</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>release-history.rst</path>
+  <content>
+.. _release_history:
+
+Release and Version History
+==============================================================================
+
+
+x.y.z (Backlog)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Features and Improvements**
+
+**Minor Improvements**
+
+**Bugfixes**
+
+**Miscellaneous**
+
+
+0.1.1 (2025-03-03)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- First release
+- Add the following public APIs:
+    - ``docpack.api.find_matching_files``
+    - ``docpack.api.GitHubFile``
+    - ``docpack.api.GitHubPipeline``
+    - ``docpack.api.ConfluencePage``
+    - ``docpack.api.ConfluencePipeline``
+
+  </content>
+</document>

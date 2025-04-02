@@ -1,0 +1,18 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docs/source/01-What-is-docpack/index.rst</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docs/source/01-What-is-docpack/index.rst</path>
+  <content>
+What is docpack
+==============================================================================
+DocPack is a powerful Python utility that packages files from diverse source systems into a rich-context, single-file knowledge base. This consolidated format allows you to simply drag and drop documents into AI assistants, ask questions immediately, or seamlessly upload them to your AI knowledge base vector store for long-term reference and retrieval. DocPack transforms scattered documentation into an AI-ready resource that preserves critical context and structure.
+
+The library supports various data sources and provides a robust include/exclude syntax similar to .gitignore for precise document filtering. This pattern-matching capability gives you granular control over which documents to include in your knowledge base, allowing you to target specific file types, directories, or individual documents while excluding others. DocPack handles the complexity of crawling, filtering, and processing documents so you can focus on utilizing the information.
+
+DocPack enriches each document with comprehensive metadata including file paths, folder structures, document URLs, titles, and data source types. This contextual information enables AI systems to provide more accurate responses with proper source attribution, allowing you to verify information at its origin. Currently, DocPack supports both local file systems (via :class:`~docpack.github_fetcher.GitHubPipeline`) and Confluence pages (via :class:`~docpack.confluence_fetcher.ConfluencePipeline`), with each fetcher specialized in extracting and preserving the unique metadata of its source system.
+
+  </content>
+</document>

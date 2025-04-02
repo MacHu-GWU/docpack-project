@@ -1,0 +1,17 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s03_1_run_unit_test.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s03_1_run_unit_test.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.run_unit_test(real_run=True, verbose=True)
+
+  </content>
+</document>

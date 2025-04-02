@@ -1,0 +1,23 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/pywf.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/pywf.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+"""
+Initialize PyWf object from a ``pyproject.toml`` file.
+"""
+
+from pathlib import Path
+from pywf_open_source.api import PyWf
+
+dir_here = Path(__file__).absolute().parent
+path_pyproject_toml = dir_here.parent.joinpath("pyproject.toml")
+pywf = PyWf.from_pyproject_toml(path_pyproject_toml)
+
+  </content>
+</document>

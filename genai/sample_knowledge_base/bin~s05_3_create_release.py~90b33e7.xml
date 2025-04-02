@@ -1,0 +1,17 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s05_3_create_release.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s05_3_create_release.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.publish_to_github_release(real_run=True, verbose=True)
+
+  </content>
+</document>

@@ -1,0 +1,17 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s06_1_setup_codecov.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s06_1_setup_codecov.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pywf import pywf
+
+pywf.setup_codecov_io_upload_token_on_github(real_run=True, verbose=True)
+
+  </content>
+</document>

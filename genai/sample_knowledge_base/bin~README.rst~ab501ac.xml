@@ -1,0 +1,14 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/README.rst</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/README.rst</path>
+  <content>
+About the ``bin`` folder
+==============================================================================
+The ``bin`` folder (bin stands for binary) is a Linux convention that stores the executable scripts.
+
+  </content>
+</document>

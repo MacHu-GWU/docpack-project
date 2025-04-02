@@ -110,11 +110,23 @@ def test_process_include_exclude():
 def test_find_matching_files_case_1():
     res = find_matching_files(
         dir_root=dir_project_root,
-        include=["docpack/**/*.py", "docs/source/**/*.rst"],
-        exclude=[],
+        include=[
+            "docpack/**/*.py",
+            "tests/**/*.py",
+            "docs/source/*/**/index.rst",
+            "docs/source/*/**/*.py",
+            "README.rst",
+            "pyproject.toml",
+        ],
+        exclude=[
+            "docpack/docs/**/*.*",
+            "docpack/tests/**/*.*",
+            "docpack/vendor/**/*.*",
+            "tests/**/all.py",
+        ],
     )
     for path in res:
-        print(path)
+        print(path.relative_to(dir_project_root))
 
 
 if __name__ == "__main__":

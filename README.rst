@@ -55,6 +55,8 @@ Welcome to ``docpack`` Documentation
 
 DocPack is a Python utility library designed to efficiently consolidate documentation from multiple sources (GitHub, Confluence, and local file systems) into a single, AI-accessible knowledge base. It provides tools for retrieving, formatting, and packaging document content with consistent structure to facilitate efficient reference by Large Language Models.
 
+For example, this `generate_knowledge_base.py <https://github.com/MacHu-GWU/docpack-project/blob/main/genai/generate_knowledge_base.py>`_ script converts the `docpack <https://github.com/MacHu-GWU/docpack-project>`_ GitHub repository into an `all_in_one_knowledge_base.txt <https://github.com/MacHu-GWU/docpack-project/blob/main/genai/sample_knowledge_base/all_in_one_knowledge_base.txt>`_ file. It is concatenated from all of the files in the `sample_knowledge_base <https://github.com/MacHu-GWU/docpack-project/tree/main/genai/sample_knowledgebase>`_ directory.
+
 
 .. _install:
 

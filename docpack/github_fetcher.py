@@ -17,6 +17,7 @@ them suitable for knowledge extraction, documentation generation, and AI context
 import typing as T
 import hashlib
 from pathlib import Path
+from functools import cached_property
 
 from pydantic import BaseModel, Field
 

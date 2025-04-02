@@ -1,0 +1,20 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/docpack/__init__.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>docpack/__init__.py</path>
+  <content>
+# -*- coding: utf-8 -*-
+
+from ._version import __version__
+from ._version import __short_description__
+from ._version import __license__
+from ._version import __author__
+from ._version import __author_email__
+from ._version import __maintainer__
+from ._version import __maintainer_email__
+
+  </content>
+</document>

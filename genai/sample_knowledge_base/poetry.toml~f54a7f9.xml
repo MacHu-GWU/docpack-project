@@ -1,0 +1,12 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/poetry.toml</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>poetry.toml</path>
+  <content>
+[virtualenvs]
+in-project = true
+  </content>
+</document>

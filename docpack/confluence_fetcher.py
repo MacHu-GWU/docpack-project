@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+Confluence page fetching and processing utilities.
+"""
+
 import typing as T
 import json
 import gzip
@@ -262,6 +266,7 @@ def load_or_build_page_hierarchy(
     confluence: pyatlassian.confluence.Confluence,
     space_id: int,
     cache_key: str,
+    expire: int = 24 * 60 * 60,
 ) -> list[ConfluencePage]:
     """
     Retrieves a complete Confluence page hierarchy with caching support.
@@ -301,7 +306,7 @@ def load_or_build_page_hierarchy(
         cache_value = gzip.compress(
             json.dumps(data, ensure_ascii=False).encode("utf-8")
         )
-        cache[real_cache_key] = cache_value
+        cache.set(real_cache_key, cache_value, expire=expire)
         return sorted_pages
 
 
@@ -483,12 +488,59 @@ def find_matching_pages(
 
 
 class ConfluencePipeline(BaseModel):
+    """
+    A data pipeline that extracts and synchronizes Confluence pages to a target location.
+
+    ConfluencePipeline provides an abstraction for defining a Confluence space source and
+    filtering criteria, then exporting the matching pages to a specified output directory
+    as structured XML documents that preserve both content and metadata.
+
+    The pipeline handles the complete workflow from authentication to content extraction,
+    hierarchical processing, filtering, and file export with metadata preservation.
+
+    Example:
+
+    .. code-block:: python
+
+        confluence_pipeline = ConfluencePipeline(
+            confluence=confluence,
+            space_id=space_id,
+            # Use cache key to avoid re-fetching the same page hierarchy
+            # it will store all pages in the cache and use it for filtering
+            # if you change the include / exclude pattern
+            cache_key=cache_key,
+            include=[
+                # include all child page
+                f"{confluence.url}/wiki/spaces/{space_key}/pages/{page_id}/{page_title}/*",
+                # only include this page, no child page
+                f"{confluence.url}/wiki/spaces/{space_key}/pages/{page_id}/{page_title}",
+            ],
+            exclude=[
+                # exclude all child page
+                f"{confluence.url}/wiki/spaces/{space_key}/pages/{page_id}/{page_title}/*",
+                # only exclude this page, no child page
+                f"{confluence.url}/wiki/spaces/{space_key}/pages/{page_id}/{page_title}",
+            ],
+        )
+
+
+    :param confluence: Authenticated Confluence API client instance
+    :param space_id: ID of the Confluence space to process
+    :param include: List of patterns (URLs or IDs) specifying which pages to include.
+        Use Page URL + ``/*`` to include all children of a page.
+    :param exclude: List of patterns (URLs or IDs) specifying which pages to exclude
+        Use Page URL + ``/*`` to include all children of a page.
+    :param dir_out: The directory where the XML files should be exported
+    :param cache_key: Key for caching and retrieving page hierarchies
+    :param cache_expire: Cache expiration time in seconds (default: 24 hours)
+    """
     confluence: pyatlassian.confluence.Confluence = Field()
     space_id: int = Field()
-    cache_key: str = Field()
     include: T.List[str] = Field()
     exclude: T.List[str] = Field()
     dir_out: Path = Field()
+    cache_key: str = Field()
+    cache_expire: int = Field(default=24 * 60 * 60)
 
     def post_process_confluence_page(
         self,
@@ -504,6 +556,15 @@ class ConfluencePipeline(BaseModel):
         pass
 
     def fetch(self):
+        """
+        Execute the pipeline to extract and export Confluence pages to the target directory.
+
+        This method performs the complete workflow:
+
+        1. List all pages in the given Confluence space that match the include/exclude patterns
+        2. Converts each page to a ConfluencePage object with metadata
+        3. Exports each page as an XML document to the specified output directory
+        """
         sorted_pages = load_or_build_page_hierarchy(
             confluence=self.confluence,
             space_id=self.space_id,

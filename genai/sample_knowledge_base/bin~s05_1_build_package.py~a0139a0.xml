@@ -1,0 +1,22 @@
+<document>
+  <source_type>GitHub Repository</source_type>
+  <github_url>https://github.com/MacHu-GWU/docpack-project/blob/main/bin/s05_1_build_package.py</github_url>
+  <account>MacHu-GWU</account>
+  <repo>docpack-project</repo>
+  <branch>main</branch>
+  <path>bin/s05_1_build_package.py</path>
+  <content>
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+We primarily use poetry to build the package.
+"""
+
+from pywf import pywf
+
+# pywf.python_build(real_run=True, verbose=True)
+pywf.poetry_build(real_run=True, verbose=True)
+
+  </content>
+</document>
