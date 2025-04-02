@@ -132,4 +132,8 @@ def test_find_matching_files_case_1():
 if __name__ == "__main__":
     from docpack.tests import run_cov_test
 
-    run_cov_test(__file__, "docpack.find_matching_files", preview=False)
+    run_cov_test(
+        __file__,
+        "docpack.find_matching_files",
+        preview=False,
+    )

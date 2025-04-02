@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import uuid
 import shutil
+
 from docpack.cache import cache
 from docpack.tests.confluence import confluence
 from docpack.confluence_fetcher import (
@@ -73,11 +75,9 @@ def test_process_include_exclude():
 
 class TestConfluencePipeline:
     def test_fetch(self):
-        space_id = 65697
-        cache_key = "2025-03-01"  # business development
+        space_id = 68321325 # docpack Unit Test
+        cache_key = str(uuid.uuid4())
         shutil.rmtree(dir_tmp, ignore_errors=True)
-        real_cache_key = (confluence.url, space_id, cache_key)
-        cache.delete(real_cache_key)
 
         confluence_pipeline = ConfluencePipeline(
             confluence=confluence,
@@ -99,4 +99,8 @@ class TestConfluencePipeline:
 if __name__ == "__main__":
     from docpack.tests import run_cov_test
 
-    run_cov_test(__file__, "docpack.confluence_fetcher", preview=False)
+    run_cov_test(
+        __file__,
+        "docpack.confluence_fetcher",
+        preview=False,
+    )

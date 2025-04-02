@@ -71,4 +71,8 @@ class TestGitHubPipeline:
 if __name__ == "__main__":
     from docpack.tests import run_cov_test
 
-    run_cov_test(__file__, "docpack.github_fetcher", preview=False)
+    run_cov_test(
+        __file__,
+        "docpack.github_fetcher",
+        preview=False,
+    )
