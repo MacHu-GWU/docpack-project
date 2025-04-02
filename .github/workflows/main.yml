@@ -88,6 +88,10 @@ jobs:
           poetry install --extras test
       # Run pytest with coverage reporting
       - name: "Run pytest"
+        env: # Or as an environment variable
+          CONF_URL: ${{ secrets.CONF_URL }}
+          CONF_USERNAME: ${{ secrets.CONF_USERNAME }}
+          CONF_PASSWORD: ${{ secrets.CONF_PASSWORD }}
         run: "poetry run pytest tests --cov=${{ env.PACKAGE_NAME }} --cov-report=xml --cov-report term-missing"
       # Upload coverage report to Codecov
       # The 'if' condition checks if the current Python version should report coverage

@@ -84,12 +84,12 @@ class TestConfluencePipeline:
             space_id=space_id,
             cache_key=cache_key,
             include=[
-                f"{confluence.url}/wiki/spaces/BD/pages/3178507/Products/*",
-                f"{confluence.url}/wiki/spaces/BD/pages/46792705/Services/*",
+                f"{confluence.url}/wiki/spaces/DOCPACKUT/pages/70647810/Topic+1/*",
+                f"{confluence.url}/wiki/spaces/DOCPACKUT/pages/70647820/Topic+2/*",
             ],
             exclude=[
-                f"{confluence.url}/wiki/spaces/BD/pages/3113056/Data+Pipeline+for+DynamoDB+-+Competitive+Analysis/*",
-                f"{confluence.url}/wiki/spaces/BD/pages/56197124/Service+Catalog",
+                f"{confluence.url}/wiki/spaces/DOCPACKUT/pages/71008257/topic+1+-+design/*",
+                f"{confluence.url}/wiki/spaces/DOCPACKUT/pages/70713375/topic+2+-+document+2",
             ],
             dir_out=dir_tmp,
         )
