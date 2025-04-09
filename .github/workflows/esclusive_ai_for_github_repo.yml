@@ -1,0 +1,16 @@
+# comprehensive github action yml reference: https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions
+name: run_esclusive_ai_for_github_repo
+
+on:
+  push: # any push event to master will trigger this
+    branches: ["main"]
+  pull_request: # any pull request to master will trigger this
+    branches: ["main"]
+  workflow_dispatch: # allows you to manually trigger run
+
+permissions:
+  contents: write # need this permission to publish knowledge base to GitHub Release
+
+jobs:
+  run_esclusive_repo_ai:
+    uses: easyscalecloud/esclusive-ai-for-github-repo/.github/workflows/run.yml@main

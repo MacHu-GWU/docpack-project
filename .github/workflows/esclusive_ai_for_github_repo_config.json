@@ -1,0 +1,39 @@
+{
+    "include": [
+        "docpack/**/*.py",
+        "tests/**/*.py",
+        "docs/source/**/index.rst",
+        "docs/source/**/index.md",
+        "docs/source/**/*.py",
+        "bin/**/*.py",
+        ".github/workflows/*.yml",
+        "README.rst",
+        "Makefile",
+        "poetry.toml",
+        "pyproject.toml",
+        ".coveragerc",
+        "codecov.yml",
+        ".readthedocs.yml",
+        "release-history.rst"
+    ],
+    "exclude": [
+        "docpack/tests/**",
+        "docpack/tests/**/*.*",
+        "docpack/vendor/**",
+        "docpack/vendor/**/*.*",
+        "tests/all.py",
+        "tests/**/all.py",
+        "docs/source/index.rst",
+        "docs/source/release-history.rst",
+        "docs/source/conf.py",
+        ".venv/**/*.*",
+        ".poetry/**/*.*",
+        "build/**/*.*",
+        "dist/**/*.*",
+        "htmlcov/**/*.*",
+        "tmp/**/*.*",
+        ".pytest_cache/**/*.*",
+        ".cache/**/*.*",
+        ".coverage"
+    ]
+}
