@@ -1548,14 +1548,14 @@ tests = ["pytest"]
 
 [[package]]
 name = "pyatlassian"
-version = "0.3.1"
+version = "0.3.2"
 description = "Modern, Pythonic interface for Atlassian's REST APIs, designed specifically for cloud-based Atlassian products."
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "pyatlassian-0.3.1-py3-none-any.whl", hash = "sha256:ff8f83dadc11b993e4d4860337386d27e93f06d3f7b0b554dda8bf041df8ac3f"},
-    {file = "pyatlassian-0.3.1.tar.gz", hash = "sha256:d482701bdbdec8054dd18bd6bae127f2bc3a6e5d14584932637eb7ecb7d2e433"},
+    {file = "pyatlassian-0.3.2-py3-none-any.whl", hash = "sha256:e10878227f7a242b082064eec6a06958e52cf569cbce11ad4bd430a19f7175a8"},
+    {file = "pyatlassian-0.3.2.tar.gz", hash = "sha256:7b618f9d587a2389f225d92f70d3479f0a61542d0088e966dab6f3ed1d2c669b"},
 ]
 
 [package.dependencies]
@@ -2762,4 +2762,4 @@ test = ["pytest", "pytest-cov"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4.0"
-content-hash = "401c3b5b608d33cf71b6d746c4cbc5066fed7dd00b8fb7a69d30c2d0e9d3e467"
+content-hash = "1c308d592143990dd4f401194a99ddb97681b6582764e7796092180a18c85fbc"

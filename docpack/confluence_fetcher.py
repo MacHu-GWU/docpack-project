@@ -8,6 +8,7 @@ import typing as T
 import json
 import gzip
 from pathlib import Path
+from functools import cached_property
 
 from pydantic import BaseModel, Field
 import pyatlassian.api as pyatlassian
@@ -525,7 +526,7 @@ class ConfluencePipeline(BaseModel):
 
 
     :param confluence: Authenticated Confluence API client instance
-    :param space_id: ID of the Confluence space to process
+    :param space_id: space ID (int) or space key (str) of the Confluence space to process
     :param include: List of patterns (URLs or IDs) specifying which pages to include.
         Use Page URL + ``/*`` to include all children of a page.
     :param exclude: List of patterns (URLs or IDs) specifying which pages to exclude
@@ -534,18 +535,43 @@ class ConfluencePipeline(BaseModel):
     :param cache_key: Key for caching and retrieving page hierarchies
     :param cache_expire: Cache expiration time in seconds (default: 24 hours)
     """
+
     confluence: pyatlassian.confluence.Confluence = Field()
-    space_id: int = Field()
+    space_id: T.Union[int, str] = Field()
     include: T.List[str] = Field()
     exclude: T.List[str] = Field()
     dir_out: Path = Field()
     cache_key: str = Field()
     cache_expire: int = Field(default=24 * 60 * 60)
 
+    @cached_property
+    def _space_id(self) -> int:
+        """
+        Get the space ID from the provided space_id.
+        """
+        if isinstance(self.space_id, str):
+            res = self.confluence.get_spaces(
+                keys=[self.space_id],
+            )
+            space_id = None
+            for dct in res.get("results", []):
+                if dct.get("key") == self.space_id:
+                    space_id = int(dct["id"])
+                    return space_id
+            if space_id is None:  # pragma: no cover
+                raise ValueError("Space not found")
+        else:
+            return self.space_id
+
     def post_process_confluence_page(
         self,
         confluence_page: ConfluencePage,
     ) -> ConfluencePage:
+        """
+        Post-process the ConfluencePage object after fetching it.
+
+        User can override this method to add custom processing logic
+        """
         return confluence_page
 
     def post_process_path_out(
@@ -553,6 +579,9 @@ class ConfluencePipeline(BaseModel):
         confluence_page: ConfluencePage,
         path_out: Path,
     ):
+        """
+        Post-process the output path after exporting a Confluence page.
+        """
         pass
 
     def fetch(self):
@@ -567,7 +596,7 @@ class ConfluencePipeline(BaseModel):
         """
         sorted_pages = load_or_build_page_hierarchy(
             confluence=self.confluence,
-            space_id=self.space_id,
+            space_id=self._space_id,
             cache_key=self.cache_key,
         )
         matched_pages = find_matching_pages(
