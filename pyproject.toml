@@ -17,10 +17,10 @@ description = "DocPack efficiently consolidates documentation from GitHub, Confl
 license = "MIT"
 license-files = ["LICENSE.txt", "AUTHORS.rst"]
 authors = [
-    { name = "Sanhe Hu", email = "husanhe@email.com" },
+    { name = "Sanhe Hu", email = "husanhe@gmail.com" },
 ]
 maintainers = [
-    { name = "Sanhe Hu", email = "husanhe@email.com" },
+    { name = "Sanhe Hu", email = "husanhe@gmail.com" },
 ]
 keywords = []
 readme = "README.rst"
