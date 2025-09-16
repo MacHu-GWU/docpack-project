@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import shutil
 from docpack.github_fetcher import (
     extract_domain,
     GitHubPipeline,
 )
+import shutil
 from docpack.paths import (
     dir_project_root,
     dir_tmp,
     PACKAGE_NAME,
 )
+from docpack.constants import GitHubFileFieldEnum
 
 
 def test_extract_domain():
@@ -63,6 +64,7 @@ class TestGitHubPipeline:
                 f"docs/source/index.rst",
             ],
             dir_out=dir_tmp,
+            wanted_fields=None,
         )
         assert gh_pipeline.domain == "github.com"
         gh_pipeline.fetch()

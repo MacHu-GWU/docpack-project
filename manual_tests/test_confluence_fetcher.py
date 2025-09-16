@@ -4,17 +4,17 @@
 Ad-hoc test for the confluence_fetcher.py module.
 """
 
-from rich import print as rprint
-from pyatlassian.tests.api_keys import esc_conf
 from docpack.confluence_fetcher import (
     load_or_build_page_hierarchy,
     find_matching_pages,
 )
+from docpack.tests.confluence import confluence
+from rich import print as rprint
 
 space_id = 65697  # business development
 
 sorted_pages = load_or_build_page_hierarchy(
-    confluence=esc_conf,
+    confluence=confluence,
     space_id=space_id,
     cache_key="2025-03-02",
 )

@@ -17,11 +17,10 @@ them suitable for knowledge extraction, documentation generation, and AI context
 import typing as T
 import hashlib
 from pathlib import Path
-from functools import cached_property
 
 from pydantic import BaseModel, Field
 
-from .constants import TAB
+from .constants import TAB, GitHubFileFieldEnum
 from .find_matching_files import find_matching_files
 
 
@@ -107,33 +106,55 @@ class GitHubFile(BaseModel):
         """
         return "/".join(self.path_parts)
 
-    def to_xml(self) -> str:
+    def to_xml(
+        self,
+        wanted_fields: list[str] | None = None,
+    ) -> str:
         """
         Serialize the file data to XML format.
 
         This method generates an XML representation of the file including its GitHub
         metadata and content, suitable for document storage or AI context input.
         """
+        if wanted_fields is None:
+            wanted_fields = [field.value for field in GitHubFileFieldEnum]
         lines = list()
 
         lines.append("<document>")
-        lines.append(f"{TAB}<source_type>GitHub Repository</source_type>")
-        lines.append(f"{TAB}<github_url>{self.github_url}</github_url>")
-        lines.append(f"{TAB}<account>{self.account}</account>")
-        lines.append(f"{TAB}<repo>{self.repo}</repo>")
-        lines.append(f"{TAB}<branch>{self.branch}</branch>")
-        lines.append(f"{TAB}<path>{self.path}</path>")
+        if GitHubFileFieldEnum.source_type.value in wanted_fields:
+            field = GitHubFileFieldEnum.source_type.value
+            lines.append(f"{TAB}<{field}>GitHub Repository</{field}>")
+        if GitHubFileFieldEnum.github_url.value in wanted_fields:
+            field = GitHubFileFieldEnum.github_url.value
+            lines.append(f"{TAB}<{field}>{self.github_url}</{field}>")
+        if GitHubFileFieldEnum.account.value in wanted_fields:
+            field = GitHubFileFieldEnum.account.value
+            lines.append(f"{TAB}<{field}>{self.account}</{field}>")
+        if GitHubFileFieldEnum.repo.value in wanted_fields:
+            field = GitHubFileFieldEnum.repo.value
+            lines.append(f"{TAB}<{field}>{self.repo}</{field}>")
+        if GitHubFileFieldEnum.branch.value in wanted_fields:
+            field = GitHubFileFieldEnum.branch.value
+            lines.append(f"{TAB}<{field}>{self.branch}</{field}>")
+        if GitHubFileFieldEnum.path.value in wanted_fields:
+            field = GitHubFileFieldEnum.path.value
+            lines.append(f"{TAB}<{field}>{self.path}</{field}>")
         if self.title:
-            lines.append(f"{TAB}<title>{self.title}</path>")
+            if GitHubFileFieldEnum.title.value in wanted_fields:
+                field = GitHubFileFieldEnum.title.value
+                lines.append(f"{TAB}<{field}>{self.title}</{field}>")
         if self.description:
-            lines.append(f"{TAB}<description>")
-            lines.append(self.description)
-            lines.append(f"{TAB}</description>")
-        lines.append(f"{TAB}<content>")
-        lines.append(self.content)
-        lines.append(f"{TAB}</content>")
+            if GitHubFileFieldEnum.description.value in wanted_fields:
+                field = GitHubFileFieldEnum.description.value
+                lines.append(f"{TAB}<{field}>")
+                lines.append(self.description)
+                lines.append(f"{TAB}</{field}>")
+        if GitHubFileFieldEnum.content.value in wanted_fields:
+            field = GitHubFileFieldEnum.content.value
+            lines.append(f"{TAB}<{field}>")
+            lines.append(self.content)
+            lines.append(f"{TAB}</{field}>")
         lines.append("</document>")
-
         return "\n".join(lines)
 
     @property
@@ -166,6 +187,7 @@ class GitHubFile(BaseModel):
     def export_to_file(
         self,
         dir_out: Path,
+        wanted_fields: list[str] | None = None,
     ) -> Path:
         """
         Export the file data as an XML document to the specified directory.
@@ -178,7 +200,7 @@ class GitHubFile(BaseModel):
         :returns: The path to the created XML file
         """
         path_out = dir_out.joinpath(f"{self.breadcrumb_path}~{self.uri_hash}.xml")
-        content = self.to_xml()
+        content = self.to_xml(wanted_fields=wanted_fields)
         try:
             path_out.write_text(content, encoding="utf-8")
         except FileNotFoundError as e:
@@ -302,6 +324,7 @@ class GitHubPipeline(BaseModel):
     include: list[str] = Field()
     exclude: list[str] = Field()
     dir_out: Path = Field()
+    wanted_fields: list[str] | None = Field(default=None)
 
     def model_post_init(self, __context: T.Any) -> None:
         self.domain = extract_domain(self.domain)
@@ -333,5 +356,8 @@ class GitHubPipeline(BaseModel):
         )
         for github_file in github_file_list:
             github_file = self.post_process_github_file(github_file)
-            path_out = github_file.export_to_file(dir_out=self.dir_out)
+            path_out = github_file.export_to_file(
+                dir_out=self.dir_out,
+                wanted_fields=self.wanted_fields,
+            )
             self.post_process_path_out(github_file=github_file, path_out=path_out)

@@ -4,13 +4,12 @@
 Ad-hoc test for the github_fetcher.py module.
 """
 
-from rich import print as rprint
-from pathlib import Path
-from docpack.paths import dir_project_root, PACKAGE_NAME
 from docpack.github_fetcher import (
     find_matching_github_files_from_cloned_folder,
     GitHubPipeline,
 )
+from docpack.paths import dir_project_root, PACKAGE_NAME
+
 
 dir_repo = dir_project_root
 # dir_repo = Path.home().joinpath("Downloads", "docpack-project-main")
@@ -45,5 +44,5 @@ github_file_list = find_matching_github_files_from_cloned_folder(
 )
 
 for github_file in github_file_list:
-#     rprint(github_file)
+    #     rprint(github_file)
     print(github_file.path, github_file.github_url)

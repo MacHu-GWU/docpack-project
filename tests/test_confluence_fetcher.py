@@ -3,7 +3,6 @@
 import uuid
 import shutil
 
-from docpack.cache import cache
 from docpack.tests.confluence import confluence
 from docpack.confluence_fetcher import (
     extract_id,
@@ -11,9 +10,7 @@ from docpack.confluence_fetcher import (
     ConfluencePipeline,
 )
 from docpack.paths import (
-    dir_project_root,
     dir_tmp,
-    PACKAGE_NAME,
 )
 
 

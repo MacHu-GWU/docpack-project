@@ -14,7 +14,7 @@ from pydantic import BaseModel, Field
 import pyatlassian.api as pyatlassian
 import atlas_doc_parser.api as atlas_doc_parser
 
-from .constants import TAB
+from .constants import TAB, ConfluencePageFieldEnum
 from .cache import cache
 
 
@@ -97,27 +97,38 @@ class ConfluencePage(BaseModel):
         md_content = "\n".join(lines)
         return md_content
 
-    def to_xml(self) -> str:
+    def to_xml(
+        self,
+        wanted_fields: list[str] | None = None,
+    ) -> str:
         """
         Serialize the file data to XML format.
 
         This method generates an XML representation of the file including its GitHub
         metadata and content, suitable for document storage or AI context input.
         """
+        if wanted_fields is None:
+            wanted_fields = [field.value for field in ConfluencePageFieldEnum]
         lines = list()
-        "https://easyscalecloud.atlassian.net/wiki/spaces/BD/pages/62128129/CHC+AI+Brain+Implementation+Proposal"
-        "/spaces/BD/pages/47251518/Case+Study+-+Transforming+Financial+Services+Building+an+Enterprise-Grade+AI+Infrastructure+for+Scalable+Innovation"
         lines.append("<document>")
-        lines.append(f"{TAB}<source_type>Confluence Page</source_type>")
-        lines.append(f"{TAB}<confluence_url>{self.webui_url}</confluence_url>")
-        lines.append(f"{TAB}<title>{self.title}</path>")
+        if ConfluencePageFieldEnum.source_type.value in wanted_fields:
+            field = ConfluencePageFieldEnum.source_type.value
+            lines.append(f"{TAB}<{field}>Confluence Page</{field}>")
+        if ConfluencePageFieldEnum.confluence_url.value in wanted_fields:
+            field = ConfluencePageFieldEnum.confluence_url.value
+            lines.append(f"{TAB}<{field}>{self.webui_url}</{field}>")
+        if ConfluencePageFieldEnum.title.value in wanted_fields:
+            field = ConfluencePageFieldEnum.title.value
+            lines.append(f"{TAB}<{field}>{self.title}</{field}>")
         # if self.description:
         #     lines.append(f"{TAB}<description>")
         #     lines.append(self.description)
         #     lines.append(f"{TAB}</description>")
-        lines.append(f"{TAB}<markdown_content>")
-        lines.append(self.markdown)
-        lines.append(f"{TAB}</markdown_content>")
+        if ConfluencePageFieldEnum.markdown_content.value in wanted_fields:
+            field = ConfluencePageFieldEnum.markdown_content.value
+            lines.append(f"{TAB}<{field}>")
+            lines.append(self.markdown)
+            lines.append(f"{TAB}</{field}>")
         lines.append("</document>")
 
         return "\n".join(lines)
@@ -125,11 +136,12 @@ class ConfluencePage(BaseModel):
     def export_to_file(
         self,
         dir_out: Path,
+        wanted_fields: list[str] | None = None,
     ) -> Path:
         fname = self.breadcrumb_path[3:].replace("||", "~")
         basename = f"{fname}.xml"
         path_out = dir_out.joinpath(basename)
-        content = self.to_xml()
+        content = self.to_xml(wanted_fields=wanted_fields)
         try:
             path_out.write_text(content, encoding="utf-8")
         except FileNotFoundError:
@@ -536,13 +548,14 @@ class ConfluencePipeline(BaseModel):
     :param cache_expire: Cache expiration time in seconds (default: 24 hours)
     """
 
-    confluence: pyatlassian.confluence.Confluence = Field()
-    space_id: T.Union[int, str] = Field()
-    include: T.List[str] = Field()
-    exclude: T.List[str] = Field()
+    confluence: "pyatlassian.confluence.Confluence" = Field()
+    space_id: int | str = Field()
+    include: list[str] = Field()
+    exclude: list[str] = Field()
     dir_out: Path = Field()
     cache_key: str = Field()
     cache_expire: int = Field(default=24 * 60 * 60)
+    wanted_fields: list[str] | None = Field(default=None)
 
     @cached_property
     def _space_id(self) -> int:
@@ -606,5 +619,7 @@ class ConfluencePipeline(BaseModel):
         )
         for page in matched_pages:
             page = self.post_process_confluence_page(page)
-            path_out = page.export_to_file(dir_out=self.dir_out)
+            path_out = page.export_to_file(
+                dir_out=self.dir_out, wanted_fields=self.wanted_fields
+            )
             self.post_process_path_out(confluence_page=page, path_out=path_out)

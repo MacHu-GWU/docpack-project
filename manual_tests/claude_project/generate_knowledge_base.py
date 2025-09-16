@@ -6,6 +6,7 @@ from pathlib import Path
 from pyatlassian.tests.api_keys import esc_conf
 
 from docpack.paths import dir_project_root, PACKAGE_NAME
+from docpack.constants import ConfluencePageFieldEnum
 from docpack.github_fetcher import GitHubPipeline
 from docpack.confluence_fetcher import ConfluencePipeline
 
@@ -52,5 +53,10 @@ confluence_pipeline = ConfluencePipeline(
         "https://easyscalecloud.atlassian.net/wiki/spaces/BD/pages/56197124/Service+Catalog",
     ],
     dir_out=dir_tmp,
+    wanted_fields=[
+        ConfluencePageFieldEnum.source_type,
+        ConfluencePageFieldEnum.title,
+        ConfluencePageFieldEnum.markdown_content,
+    ]
 )
 confluence_pipeline.fetch()

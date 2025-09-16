@@ -17,10 +17,13 @@ if "CI" in os.environ:
         password=password,
     )
 else:
-    path = Path.home().joinpath(".atlassian", "easyscalecloud", "sanhe-dev.json")
-    data = json.loads(path.read_text("utf-8"))
+    from home_secret.api import hs
+
+    url = hs.v("providers.atlassian.accounts.sh.site_url")
+    username = hs.v("providers.atlassian.accounts.sh.users.sh.email")
+    password = hs.v("providers.atlassian.accounts.sh.users.sh.secrets.sync_page.value")
     confluence = pyatlassian.confluence.Confluence(
-        url=data["url"],
-        username=data["username"],
-        password=data["password"],
+        url=url,
+        username=username,
+        password=password,
     )
