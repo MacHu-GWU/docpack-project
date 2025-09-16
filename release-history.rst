@@ -15,6 +15,13 @@ x.y.z (Backlog)
 **Miscellaneous**
 
 
+0.1.4 (2025-09-16)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Minor Improvements**
+
+- Introduces ``GitHubFileFieldEnum`` and ``ConfluencePageFieldEnum`` enums to allow selective field export in XML serialization for both GitHub and Confluence pipelines. Adds ``wanted_fields`` parameter to pipelines and export methods, enabling users to specify which fields to include in the output. Updates related tests and manual scripts to utilize the new functionality.
+
+
 0.1.3 (2025-05-28)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Minor Improvements**
