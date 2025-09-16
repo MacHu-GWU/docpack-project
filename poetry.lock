@@ -684,6 +684,24 @@ sphinx = ">=6.0,<9.0"
 sphinx-basic-ng = ">=1.0.0.beta2"
 
 [[package]]
+name = "home-secret"
+version = "0.1.3"
+description = "A unified JSON-based secret management system for local development environments with lazy loading, alias-based security, and automatic IDE integration."
+optional = true
+python-versions = "<4.0,>=3.9"
+groups = ["main"]
+markers = "extra == \"test\""
+files = [
+    {file = "home_secret-0.1.3-py3-none-any.whl", hash = "sha256:d02be20d5c6b28bc330021bb58080e6bca23f1201635e845f5b7f6f343d7921e"},
+    {file = "home_secret-0.1.3.tar.gz", hash = "sha256:8ea8d45d5000f72256ac7aed9ba5ade1bc149acef0431c62ef151f8776a9e09f"},
+]
+
+[package.extras]
+dev = ["build (>=1.2.1,<2.0.0)", "rich (>=13.8.1,<14.0.0)", "twine (>=6.0.0,<7.0.0)", "wheel (>=0.45.0,<1.0.0)"]
+doc = ["Sphinx (>=7.4.7,<8.0.0)", "docfly (==3.0.0)", "furo (==2024.8.6)", "ipython (>=8.18.1,<8.19.0)", "nbsphinx (>=0.8.12,<1.0.0)", "pygments (>=2.18.0,<3.0.0)", "rstobj (==1.2.1)", "sphinx-copybutton (>=0.5.2,<1.0.0)", "sphinx-design (>=0.6.1,<1.0.0)", "sphinx-jinja (>=2.0.2,<3.0.0)"]
+test = ["pytest (>=8.2.2,<9.0.0)", "pytest-cov (>=6.0.0,<7.0.0)"]
+
+[[package]]
 name = "id"
 version = "1.5.0"
 description = "A tool for generating OIDC identities"
@@ -739,7 +757,7 @@ description = "Read metadata from Python packages"
 optional = true
 python-versions = ">=3.9"
 groups = ["main"]
-markers = "extra == \"dev\" and (python_full_version < \"3.10.2\" or platform_machine != \"ppc64le\" and platform_machine != \"s390x\") and python_version < \"3.12\" or extra == \"doc\" and python_version < \"3.10\""
+markers = "extra == \"dev\" and (platform_machine != \"ppc64le\" and platform_machine != \"s390x\" or python_full_version < \"3.10.2\") and python_version < \"3.12\""
 files = [
     {file = "importlib_metadata-8.6.1-py3-none-any.whl", hash = "sha256:02a89390c1e15fdfdc0d7c6b25cb3e62650d0494005c97d6f148bf5b9787525e"},
     {file = "importlib_metadata-8.6.1.tar.gz", hash = "sha256:310b41d755445d74569f993ccfc22838295d9fe005425094fad953d7f15c8580"},
@@ -794,7 +812,6 @@ prompt-toolkit = ">=3.0.41,<3.1.0"
 pygments = ">=2.4.0"
 stack-data = "*"
 traitlets = ">=5"
-typing-extensions = {version = "*", markers = "python_version < \"3.10\""}
 
 [package.extras]
 all = ["black", "curio", "docrepr", "exceptiongroup", "ipykernel", "ipyparallel", "ipywidgets", "matplotlib", "matplotlib (!=3.2.0)", "nbconvert", "nbformat", "notebook", "numpy (>=1.22)", "pandas", "pickleshare", "pytest (<7)", "pytest (<7.1)", "pytest-asyncio (<0.22)", "qtconsole", "setuptools (>=18.5)", "sphinx (>=1.3)", "sphinx-rtd-theme", "stack-data", "testpath", "trio", "typing-extensions"]
@@ -983,7 +1000,6 @@ files = [
 ]
 
 [package.dependencies]
-importlib-metadata = {version = ">=4.8.3", markers = "python_version < \"3.10\""}
 jupyter-core = ">=4.12,<5.0.dev0 || >=5.1.dev0"
 python-dateutil = ">=2.8.2"
 pyzmq = ">=23.0"
@@ -1257,7 +1273,6 @@ files = [
 beautifulsoup4 = "*"
 bleach = {version = "!=5.0.0", extras = ["css"]}
 defusedxml = "*"
-importlib-metadata = {version = ">=3.6", markers = "python_version < \"3.10\""}
 jinja2 = ">=3.0"
 jupyter-core = ">=4.7"
 jupyterlab-pygments = "*"
@@ -2285,7 +2300,6 @@ babel = ">=2.13"
 colorama = {version = ">=0.4.6", markers = "sys_platform == \"win32\""}
 docutils = ">=0.20,<0.22"
 imagesize = ">=1.3"
-importlib-metadata = {version = ">=6.0", markers = "python_version < \"3.10\""}
 Jinja2 = ">=3.1"
 packaging = ">=23.0"
 Pygments = ">=2.17"
@@ -2632,7 +2646,6 @@ files = [
 
 [package.dependencies]
 id = "*"
-importlib-metadata = {version = ">=3.6", markers = "python_version < \"3.10\""}
 keyring = {version = ">=15.1", markers = "platform_machine != \"ppc64le\" and platform_machine != \"s390x\""}
 packaging = ">=24.0"
 readme-renderer = ">=35.0"
@@ -2739,7 +2752,7 @@ description = "Backport of pathlib-compatible object wrapper for zip files"
 optional = true
 python-versions = ">=3.9"
 groups = ["main"]
-markers = "(extra == \"dev\" or extra == \"doc\") and (extra == \"dev\" or python_version < \"3.10\") and (python_full_version < \"3.10.2\" or platform_machine != \"ppc64le\" and platform_machine != \"s390x\") and python_version < \"3.12\""
+markers = "extra == \"dev\" and (platform_machine != \"ppc64le\" and platform_machine != \"s390x\" or python_full_version < \"3.10.2\") and python_version < \"3.12\""
 files = [
     {file = "zipp-3.21.0-py3-none-any.whl", hash = "sha256:ac1bbe05fd2991f160ebce24ffbac5f6d11d83dc90891255885223d42b3cd931"},
     {file = "zipp-3.21.0.tar.gz", hash = "sha256:2c9958f6430a2040341a52eb608ed6dd93ef4392e02ffe219417c1b28b5dd1f4"},
@@ -2757,9 +2770,9 @@ type = ["pytest-mypy"]
 auto = []
 dev = ["build", "rich", "twine", "wheel"]
 doc = ["Sphinx", "docfly", "furo", "ipython", "nbsphinx", "pygments", "rstobj", "sphinx-copybutton", "sphinx-design", "sphinx-jinja"]
-test = ["pytest", "pytest-cov"]
+test = ["home_secret", "pytest", "pytest-cov"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.9,<4.0"
-content-hash = "1c308d592143990dd4f401194a99ddb97681b6582764e7796092180a18c85fbc"
+python-versions = ">=3.10,<4.0"
+content-hash = "37d243638d50fe27563359e544a14246c7ee1a12b16da07be372cd9779f1b339"

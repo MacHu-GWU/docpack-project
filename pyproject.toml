@@ -8,7 +8,7 @@ name = "docpack"
 # Increment version before each release - follow `semantic versioning <https://semver.org/>`_
 # Currently, poetry 2.1.X doesn't support dynamic versioning
 # (Read https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#version)
-# So this value has to be aligned with the one in ``cookiecutter_pyproject_demo/_version.py``
+# So this value has to be aligned with the one in ``docpack/_version.py``
 version = "0.1.3"
 description = "DocPack efficiently consolidates documentation from GitHub, Confluence, and files into a structured knowledge base for AI access."
 # Read https://dev-exp-share.readthedocs.io/en/latest/search.html?q=Pick+An+Open+Source+License+For+Python+Project&check_keywords=yes&area=default
@@ -17,26 +17,14 @@ description = "DocPack efficiently consolidates documentation from GitHub, Confl
 license = "MIT"
 license-files = ["LICENSE.txt", "AUTHORS.rst"]
 authors = [
-    { name = "Sanhe Hu", email = "husanhe@gmail.com" },
+    { name = "Sanhe Hu", email = "husanhe@email.com" },
 ]
 maintainers = [
-    { name = "Sanhe Hu", email = "husanhe@gmail.com" },
+    { name = "Sanhe Hu", email = "husanhe@email.com" },
 ]
 keywords = []
 readme = "README.rst"
-# Files to include in the package distribution
-include = [
-    "*.txt",
-    "*.rst",
-]
-# Files to exclude from the package
-exclude = [
-    "*.pyc",
-    "*.pyo",
-    "docpack/docs/*",
-    "docpack/tests/*",
-]
-requires-python = ">=3.9,<4.0"
+requires-python = ">=3.10,<4.0"
 # Full list of classifiers: https://pypi.org/classifiers/
 classifier = [
     "Development Status :: 4 - Beta",
@@ -87,6 +75,7 @@ dev = [
 test = [
     "pytest>=8.2.2,<9.0.0", # Testing framework
     "pytest-cov>=6.0.0,<7.0.0", # Coverage reporting
+    "home_secret>=0.1.3,<1.0.0", # load secret from local ``${HOME}/home_secret.json``
 ]
 
 # ------------------------------------------------------------------------------
@@ -101,8 +90,8 @@ doc = [
     "pygments>=2.18.0,<3.0.0", # syntax highlight
     "ipython>=8.18.1,<8.19.0", # interactive Python
     "nbsphinx>=0.8.12,<1.0.0", # add jupyter notebook in sphinx doc
-    "rstobj>=1.2.1,<2.0.0", # generate reStructuredText from Python code
-    "docfly>=3.0.0,<4.0.0", # automaticall generate .. toctree directives and API reference doc
+    "rstobj==1.2.1", # generate reStructuredText from Python code
+    "docfly==3.0.0", # automaticall generate .. toctree directives and API reference doc
 ]
 
 # ------------------------------------------------------------------------------
@@ -126,28 +115,39 @@ Download = "https://pypi.org/pypi/docpack#files"
 [tool.poetry.requires-plugins]
 poetry-plugin-export = ">=1.9.0,<2.0.0"
 
+[tool.poetry]
+# Files to include in the package distribution
+packages = [
+    { include = "docpack", from = ".", to = "." }
+]
+# Files to exclude from the package
+exclude = [
+    "docpack/tests/*",
+    "docpack/docs/*",
+    "**/*.pyc",
+    "**/*.pyo",
+]
+
 # python workflow tool config
 [tool.pywf]
 # The specific python version you use for local development
 dev_python = "3.11.8"
-# github.com account name (for unit test)
+# --- github.com
 github_account = "MacHu-GWU"
-# Create GitHub token in https://github.com/settings/tokens and put the token at
-# ``${HOME}/.github/${github_account}/pac/${github_token_name}.txt``
-github_token_name = "sanhe-dev"
-# codecov.io (for code coverage test report) account name
-# If you use GitHub account to login codecov.io, then it is the same as your github account
+# Create GitHub token in https://github.com/settings/tokens and put the token in
+# ``${HOME}/home_secret.json``
+github_token_field = "providers.github.accounts.sh.users.sh.secrets.dev.value"
+# --- codecov.io (for code coverage test report)
 codecov_account = "MacHu-GWU"
-# Create Codecov token in https://app.codecov.io/account/gh/${codecov_account}/access and put the token at
-# ``${HOME}/.codecov/github/${codecov_account}/${codecov_token_name}.txt``
-codecov_token_name = "sanhe-dev"
-# readthedocs.org user name (for documentation hosting)
-readthedocs_username = "machugwu"
+# Create Codecov token in https://app.codecov.io/account/gh/${codecov_account}/access
+# and put the token in ``${HOME}/home_secret.json``
+codecov_token_field = "providers.codecov_io.accounts.sh.users.sh.secrets.dev.value"
+# --- readthedocs.org (for documentation hosting)
+# Create Readthedocs token in https://app.readthedocs.org/accounts/tokens/
+# and put the token at ``${HOME}/home_secret.json``
+readthedocs_token_field = "providers.readthedocs.accounts.sh.users.sh.secrets.dev.value"
 # Readthedocs project name, usually it is the same as your project name
 readthedocs_project_name = "docpack"
-# Create Readthedocs token in https://app.readthedocs.org/accounts/tokens/ and put the token at
-# ``${HOME}/.readthedocs/${readthedocs_username}/${readthedocs_token_name}.txt``
-readthedocs_token_name = "sanhe-dev"
 
 # Read: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#declaring-the-build-backend
 [build-system]
