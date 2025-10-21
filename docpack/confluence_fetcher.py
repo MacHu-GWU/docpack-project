@@ -10,12 +10,13 @@ import gzip
 from pathlib import Path
 from functools import cached_property
 
-from pydantic import BaseModel, Field
+from diskcache import Cache
+from pydantic import BaseModel, Field, ConfigDict
 import pyatlassian.api as pyatlassian
 import atlas_doc_parser.api as atlas_doc_parser
 
 from .constants import TAB, ConfluencePageFieldEnum
-from .cache import cache
+from .paths import dir_cache
 
 
 class ConfluencePage(BaseModel):
@@ -278,6 +279,7 @@ def enrich_pages_with_hierarchy_data(
 def load_or_build_page_hierarchy(
     confluence: pyatlassian.confluence.Confluence,
     space_id: int,
+    cache: Cache,
     cache_key: str,
     expire: int = 24 * 60 * 60,
 ) -> list[ConfluencePage]:
@@ -547,6 +549,9 @@ class ConfluencePipeline(BaseModel):
     :param cache_key: Key for caching and retrieving page hierarchies
     :param cache_expire: Cache expiration time in seconds (default: 24 hours)
     """
+    model_config = ConfigDict(
+        arbitrary_types_allowed=True,
+    )
 
     confluence: "pyatlassian.confluence.Confluence" = Field()
     space_id: int | str = Field()
@@ -555,6 +560,7 @@ class ConfluencePipeline(BaseModel):
     dir_out: Path = Field()
     cache_key: str = Field()
     cache_expire: int = Field(default=24 * 60 * 60)
+    cache_path: str = Field(default=str(dir_cache))
     wanted_fields: list[str] | None = Field(default=None)
 
     @cached_property
@@ -575,6 +581,10 @@ class ConfluencePipeline(BaseModel):
                 raise ValueError("Space not found")
         else:
             return self.space_id
+
+    @cached_property
+    def cache(self) -> Cache:
+        return Cache(self.cache_path)
 
     def post_process_confluence_page(
         self,
@@ -611,6 +621,7 @@ class ConfluencePipeline(BaseModel):
             confluence=self.confluence,
             space_id=self._space_id,
             cache_key=self.cache_key,
+            cache=self.cache,
         )
         matched_pages = find_matching_pages(
             sorted_pages=sorted_pages,
