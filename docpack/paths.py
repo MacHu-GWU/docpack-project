@@ -31,5 +31,4 @@ dir_docs_source = dir_project_root / "docs" / "source"
 # Application Related
 # ------------------------------------------------------------------------------
 dir_project_home = dir_home / PACKAGE_NAME
-dir_project_home.mkdir(parents=True, exist_ok=True)
 dir_cache = dir_project_home / ".cache"
