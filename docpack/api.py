@@ -2,7 +2,6 @@
 
 from .constants import GitHubFileFieldEnum
 from .constants import ConfluencePageFieldEnum
-from .cache import cache
 from .find_matching_files import find_matching_files
 from .github_fetcher import GitHubFile
 from .github_fetcher import GitHubPipeline

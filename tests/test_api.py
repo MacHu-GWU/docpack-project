@@ -7,7 +7,6 @@ def test():
     _ = api
     _ = api.GitHubFileFieldEnum
     _ = api.ConfluencePageFieldEnum
-    _ = api.cache
     _ = api.find_matching_files
     _ = api.GitHubFile
     _ = api.GitHubPipeline

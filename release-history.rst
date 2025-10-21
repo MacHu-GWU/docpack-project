@@ -15,6 +15,13 @@ x.y.z (Backlog)
 **Miscellaneous**
 
 
+0.1.5 (2025-10-21)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Bugfixes**
+
+- We should not use a singleton cache for diskcache. User should have the option to specify their own cache path.
+
+
 0.1.4 (2025-09-16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Minor Improvements**
